@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreFieIdInfoMapper">
+
+    <select id="getBreFieldInfoList" parameterType="com.example.entity.BreFieldInfoDto"
+            resultType="com.example.entity.BreFieldInfoDto">
+        SELECT
+        f.english_name AS "englishName",
+        f.chinese_name AS "chineseName",
+        f.source_table AS "sourceTable",
+        f.field_type AS "fieldType",
+        f.id AS "id",
+        f.field_desc AS "fieldDesc",
+        e.export_off AS "exportOff",
+        e.field_position AS "fieldPosition",
+        e.id as "exportId"
+        FROM
+        bre_field_info f
+        LEFT JOIN bre_field_export_info e
+        ON f.english_name =e.field_id
+        WHERE 1 = 1
+        <if test="englishName !='' and englishName !=null">
+            and f.english_name=#{englishName}
+        </if>
+
+        <if test="chineseName != '' and chineseName!= null">
+            and f.chinese_name=#{chineseName}
+        </if>
+
+        <if test="sourceTable != '' and sourceTable!= null">
+            and f.source_table=#{sourceTable}
+        </if>
+
+        <if test="fieldType != '' and fieldType!= null">
+            and f.field_type=#{fieldType}
+        </if>
+
+        <if test="id != '' and id!= null">
+            and f.id=#{id}
+        </if>
+
+        <if test="fieldDesc !='' and fieldDesc!= null">
+            and f.field_desc=#{fieldDesc}
+        </if>
+        order by e.field_position,export_off desc
+    </select>
+
+</mapper>

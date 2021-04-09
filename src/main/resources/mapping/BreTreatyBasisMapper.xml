@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreTreatyBasisMapper">
+    <resultMap id="BreTreatyBasisMap" type="com.example.entity.BreTreatyBasisInfoDto">
+        <result column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="treatyTypeKey" jdbcType="INTEGER" property="treaty_type_key"/>
+        <result column="treatyType" jdbcType="VARCHAR" property="treaty_type"/>
+        <result column="breDeptKey" jdbcType="INTEGER" property="bre_dept_key"/>
+        <result column="breDept" jdbcType="VARCHAR" property="bre_dept"/>
+        <result column="typeOfBusinessKey" jdbcType="INTEGER" property="type_of_business_key"/>
+        <result column="typeOfBusiness" jdbcType="VARCHAR" property="type_of_business"/>
+        <result column="breSlipNumber" jdbcType="VARCHAR" property="bre_slip_number"/>
+        <result column="breBoundNo" jdbcType="VARCHAR" property="bre_bound_no"/>
+        <result column="cedingCompanyKey" jdbcType="VARCHAR" property="ceding_company_key"/>
+        <result column="cedingCompany" jdbcType="VARCHAR" property="ceding_company"/>
+        <result column="countryOfCedingCompany" jdbcType="VARCHAR" property="country_of_ceding_company"/>
+        <result column="producingBrokerKey" jdbcType="INTEGER" property="producing_broker_key"/>
+        <result column="producingBroker" jdbcType="VARCHAR" property="producing_broker"/>
+        <result column="countryOfProducingBroker" jdbcType="VARCHAR" property="country_of_producing_broker"/>
+        <result column="treatyName" jdbcType="VARCHAR" property="treaty_name"/>
+        <result column="currencyKey" jdbcType="VARCHAR" property="currency_key"/>
+        <result column="currency" jdbcType="VARCHAR" property="currency"/>
+        <result column="leadingReinsurerKey" jdbcType="INTEGER" property="leading_reinsurer_key"/>
+        <result column="leadingReinsurer" jdbcType="VARCHAR" property="leading_reinsurer"/>
+        <result column="businessStatusKey" jdbcType="INTEGER" property="business_status_key"/>
+        <result column="businessStatus" jdbcType="VARCHAR" property="business_status"/>
+        <result column="taxPercent" jdbcType="VARCHAR" property="tax_percent"/>
+        <result column="taxSurchargePercent" jdbcType="VARCHAR" property="tax_surcharge_percent"/>
+        <result column="remarks1" jdbcType="VARCHAR" property="remarks1"/>
+        <result column="remarks2" jdbcType="VARCHAR" property="remarks2"/>
+        <result column="remarks3" jdbcType="VARCHAR" property="remarks3"/>
+    </resultMap>
+
+    <select id="selectBreTreatyBasisAllName" resultType="com.example.entity.BreTreatAllInfoDto">
+        select treaty_name as treatyName from bre_treaty_basis_info
+    </select>
+
+    <select id="getBreTreatyBasisInfoList" parameterType="com.example.entity.BreTreatAllInfoDto"
+            resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+        treaty_type_key as "treatyTypeKey",
+        treaty_type as "treatyType",
+        bre_dept_key as "breDeptKey",
+        bre_dept as "breDept",
+        type_of_business_key as "typeOfBusinessKey",
+        type_of_business as "typeOfBusiness",
+        bre_slip_number as "breSlipNumber",
+        bre_bound_no as "breBoundNo",
+        ceding_company_key as "cedingCompanyKey",
+        ceding_company as "cedingCompany",
+        country_of_ceding_company as "countryOfCedingCompany",
+        producing_broker_key as "producingBrokerKey",
+        producing_broker as "producingBroker",
+        country_of_producing_broker as "countryOfProducingBroker",
+        treaty_name as "treatyName",
+        DATE_FORMAT(inception_date,'%Y-%m-%d %H:%i:%s') as "inceptionDate",
+        DATE_FORMAT(expiry_date,'%Y-%m-%d %H:%i:%s') as "expiryDate",
+        DATE_FORMAT(underwriting_year,'%Y') as "underwritingYear",
+        currency_key as "currencyKey",
+        currency as "currency",
+        leading_reinsurer_key as "leadingReinsurerKey",
+        leading_reinsurer as "leadingReinsurer",
+        business_status_key as "businessStatusKey",
+        business_status as "businessStatus",
+        tax_percent as "taxPercent",
+        tax_surcharge_percent as "taxSurchargePercent",
+        original_cedant as "originalCedant",
+        country_of_original_cedant as "countryOfOriginalCedant",
+        bre_create as "breCreate",
+        bre_update as "breUpdate",
+        bre_approval as "breApproval",
+        bre_quo_sum as "breQuoSum",
+        bre_spl_sum as "breSplSum",
+        value_type as "valueType",
+        remarks1 as "remarks1",
+        remarks2 as "remarks2",
+        remarks3 as "remarks3"
+        from bre_treaty_basis_info where 1=1
+        <if test="treatyTypeKey!=null and treatyTypeKey != ''">
+            and treaty_type_key=#{treatyTypeKey}
+        </if>
+        <if test="treatyType!=null and treatyType != ''">
+            and treaty_type=#{treatyType}
+        </if>
+        <if test="breDeptKey!=null and breDeptKey != ''">
+            and bre_dept_key=#{breDeptKey}
+        </if>
+        <if test="breDept!=null and breDept != ''">
+            and bre_dept=#{breDept}
+        </if>
+        <if test="typeOfBusinessKey!=null and typeOfBusinessKey != ''">
+            and type_of_business_key=#{typeOfBusinessKey}
+        </if>
+        <if test="typeOfBusiness!=null and typeOfBusiness != ''">
+            and type_of_business=#{typeOfBusiness}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            and bre_slip_number like  concat('%',#{breSlipNumber},'%')
+        </if>
+        <if test="breBoundNo!=null and breBoundNo !=''">
+            and bre_bound_no like  concat('%',#{breBoundNo},'%')
+        </if>
+        <if test="cedingCompanyKey!=null and cedingCompanyKey !=''">
+            and ceding_company_key=#{cedingCompanyKey}
+        </if>
+        <if test="cedingCompany!=null and cedingCompany !=''">
+            and ceding_company=#{cedingCompany}
+        </if>
+        <if test="countryOfCedingCompany!=null and countryOfCedingCompany !=''">
+            and country_of_ceding_company=#{countryOfCedingCompany}
+        </if>
+        <if test="producingBrokerKey!=null  and producingBrokerKey!=''">
+            and producing_broker_key=#{producingBrokerKey}
+        </if>
+        <if test="producingBroker!=null and producingBroker !=''">
+            and producing_broker=#{producingBroker}
+        </if>
+        <if test="countryOfProducingBroker!=null and countryOfProducingBroker!='' ">
+            and country_of_producing_broker=#{countryOfProducingBroker}
+        </if>
+        <if test="treatyName!=null and treatyName !=''">
+            and treaty_name=#{treatyName}
+        </if>
+        <if test="inceptionDate!=null  and  inceptionDate!=''">
+            and inception_date=STR_TO_DATE(#{inceptionDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="expiryDate!=null and expiryDate!=''">
+            and DATE_FORMAT(expiry_date,'%Y-%m-%d %H:%i:%s')=#{expiryDate}
+        </if>
+        <if test="underwritingYear!=null and underwritingYear!='' ">
+            and underwriting_year=#{underwritingYear}
+        </if>
+        <if test="currencyKey!=null and currencyKey !='' ">
+            and currency_key=#{currencyKey}
+        </if>
+        <if test="currency!=null  and currency!=''">
+            and currency=#{currency}
+        </if>
+        <if test="leadingReinsurerKey!=null and leadingReinsurerKey !=''">
+            and leading_reinsurer_key=#{leadingReinsurerKey}
+        </if>
+        <if test="leadingReinsurer!=null and leadingReinsurer != ''">
+            and leading_reinsurer=#{leadingReinsurer}
+        </if>
+        <if test="businessStatusKey!=null and businessStatusKey !='' ">
+            and business_status_key=#{businessStatusKey}
+        </if>
+        <if test="businessStatus!=null and businessStatus != ''">
+            and business_status=#{businessStatus}
+        </if>
+        <if test="taxPercent!=null and taxPercent != '' ">
+            and tax_percent=#{taxPercent}
+        </if>
+        <if test="taxSurchargePercent!=null and taxSurchargePercent !=''">
+            and tax_surcharge_percent=#{taxSurchargePercent}
+        </if>
+        <if test="originalCedant!=null and originalCedant != '' ">
+            and original_cedant=#{originalCedant}
+        </if>
+        <if test="countryOfOriginalCedant!=null and countryOfOriginalCedant != ''">
+            and country_of_original_cedant=#{countryOfOriginalCedant}
+        </if>
+
+        <if test="breCreate!=null and breCreate != ''">
+            and bre_create=#{breCreate}
+        </if>
+        <if test="breUpdate!=null and breUpdate != ''">
+            and bre_update=#{breUpdate}
+        </if>
+        <if test="breApproval!=null and breApproval!= ''">
+            and bre_approval=#{breApproval}
+        </if>
+        <if test="breQuoSum!=null and breQuoSum != ''">
+            and bre_quo=#{breQuoSum}
+        </if>
+        <if test="breSplSum!=null and breSplSum != ''">
+            and bre_spl_sum=#{breSplSum}
+        </if>
+        <if test="valueType!=null and valueType != ''">
+            and value_type=#{valueType}
+        </if>
+
+    </select>
+
+    <select id="selectBreTreatyPropAllInfo" parameterType="com.example.entity.BreTreatAllInfoDto"
+            resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+        basis.bre_slip_number as "breSlipNumber",
+        basis.treaty_type_key as "treatyTypeKey",
+        basis.treaty_type as "treatyType",
+        basis.bre_dept_key as "breDeptKey",
+        basis.bre_dept as "breDept",
+        basis.type_of_business_key as "typeOfBusinessKey",
+        basis.type_of_business as "typeOfBusiness",
+        basis.bre_bound_no as "breBoundNo",
+        basis.ceding_company_key as "cedingCompanyKey",
+        basis.ceding_company as "cedingCompany",
+        basis.country_of_ceding_company as "countryOfCedingCompany",
+        basis.producing_broker_key as "producingBrokerKey",
+        basis.producing_broker as "producingBroker",
+        basis.country_of_producing_broker as "countryOfProducingBroker",
+        basis.treaty_name as "treatyName",
+        DATE_FORMAT(basis.inception_date,'%Y-%m-%d %H:%i:%s') as "inceptionDate",
+        DATE_FORMAT(basis.expiry_date,'%Y-%m-%d %H:%i:%s') as "expiryDate",
+        DATE_FORMAT(basis.underwriting_year,'%Y') as "underwritingYear",
+        basis.currency_key as "currencyKey",
+        basis.currency as "currency",
+        basis.leading_reinsurer_key as "leadingReinsurerKey",
+        basis.leading_reinsurer as "leadingReinsurer",
+        basis.business_status_key as "businessStatusKey",
+        basis.business_status as "businessStatus",
+        basis.tax_percent as "taxPercent",
+        basis.tax_surcharge_percent as "taxSurchargePercent",
+        basis.bre_create as "breCreate",
+        basis.bre_update as "breUpdate",
+        basis.bre_approval as "breApproval",
+        basis.bre_quo_sum as "breQuoSum",
+        basis.bre_spl_sum as "breSplSum",
+        basis value_type as "valueType",
+        basis.remarks1 as "remarks1",
+        basis.remarks2 as "remarks2",
+        basis.remarks3 as "remarks3",
+        prop.id as "propId",
+        prop.bre_slip_number as "propBreSlipNumber",
+        prop.section_name as "sectionName",
+        prop.gross_retention as "grossRetention",
+        prop.cession_for_quota_share as "cessionForQuotaShare",
+        prop.line_surplus as "lineSurplus",
+        prop.commission_for_quota_share as "commissionForQuotaShare",
+        prop.commission_for_surplus as "commissionForSurplus",
+        prop.fixed_or_provisional_commission as "fixedOrProvisionalCommission",
+        prop.epi_for_quota_share as "epiForQuotaShare",
+        prop.epi_for_surplus as "epiForSurplus",
+        prop.event_limit as "eventLimit",
+        DATE_FORMAT(prop.expiry_date_Of_extension,'%Y-%m-%d %H:%i:%s') as "expiryDateOfExtension",
+        prop.underwriting_period as "underwritingPeriod",
+        prop.line_of_business as "lineOfBusiness",
+        reinsurer.id as "reinsurerId",
+        reinsurer.bre_slip_number as "reinsurerBreSlipNumber",
+        reinsurer.prop_id as "reinsurerPropId",
+        reinsurer.reinsurer as "reinsurer",
+        reinsurer.country_of_reinsurer as "countryOfReinsurer",
+        reinsurer.settlement_currency as "settlementCurrency",
+        reinsurer.placement_broker as "placementBroker",
+        reinsurer.country_of_placement_broker as "countryOfPlacementBroker",
+        reinsurer.bre_brokerage as "breBrokerage",
+        reinsurer.bre_brokerage_percent as "breBrokeragePercent",
+        reinsurer.other_fee_or_charge as "otherFeeOrCharge",
+        reinsurer.including_excluding_brokerage_vat as "includingExcludingBrokerageVat",
+        reinsurer.written_line as "writtenLine",
+        reinsurer.signed_line as "signedLine",
+        reinsurer.status_reinsurer as "statusReinsurer",
+        reinsurer.signing_date as "signing",
+        reinsurer.condition_reinsurer as "conditionReinsurer",
+        reinsurer.remarks as "reinsurerRemarks",
+        arrange.id as "arrangeId",
+        arrange.line_of_business as "lineOfBusiness",
+        arrange.arrange_section as "arrangeSection",
+        arrange.arrange_commission_for_quota_share as "arrangeCommissionForQuotaShare",
+        arrange.arrange_commission_for_surplus as "arrangeCommissionForSurplus"
+        from
+        bre_treaty_basis_info basis
+        LEFT JOIN
+        bre_treaty_prop_info prop
+        on basis.bre_slip_number = prop.bre_slip_number
+        LEFT JOIN
+        bre_treaty_reinsurer_info reinsurer
+        on prop.id=reinsurer.prop_id
+        LEFT JOIN
+        bre_treaty_arrange_info arrange
+        on reinsurer.id=arrange.prop_id
+        where 1=1
+        <if test="treatyTypeKey!=null">
+            and basis.treaty_type_key=#{treatyTypeKey}
+        </if>
+        <if test="treatyType!=null">
+            and basis.treaty_type=#{treatyType}
+        </if>
+        <if test="breDeptKey!=null">
+            and basis.bre_dept_key=#{breDeptKey}
+        </if>
+        <if test="breDept!=null">
+            and basis.bre_dept=#{breDept}
+        </if>
+        <if test="typeOfBusinessKey!=null">
+            and basis.type_of_business_key=#{typeOfBusinessKey}
+        </if>
+        <if test="typeOfBusiness!=null">
+            and basis.type_of_business=#{typeOfBusiness}
+        </if>
+        <if test="breSlipNumber!=null">
+            and basis.bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="breBoundNo!=null">
+            and basis.bre_bound_no=#{breBoundNo}
+        </if>
+        <if test="cedingCompanyKey!=null">
+            and basis.ceding_company_key=#{cedingCompanyKey}
+        </if>
+        <if test="cedingCompany!=null">
+            and basis.ceding_company=#{cedingCompany}
+        </if>
+        <if test="countryOfCedingCompany!=null">
+            and basis.country_of_ceding_company=#{countryOfCedingCompany}
+        </if>
+        <if test="producingBrokerKey!=null">
+            and basis.producing_broker_key=#{producingBrokerKey}
+        </if>
+        <if test="producingBroker!=null">
+            and basis.producing_broker=#{producingBroker}
+        </if>
+        <if test="countryOfProducingBroker!=null">
+            and basis.country_of_producing_broker=#{countryOfProducingBroker}
+        </if>
+        <if test="treatyName!=null">
+            and basis.treaty_name=#{treatyName}
+        </if>
+        <if test="inceptionDate!=null">
+            and basis.inception_date=STR_TO_DATE(#{inceptionDate}, '%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="expiryDate!=null">
+            and basis. DATE_FORMAT(expiry_date,'%Y-%m-%d %H:%i:%s')=STR_TO_DATE(#{expiryDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="underwritingYear!=null and underwritingYear != ''">
+            and basis.underwriting_year=STR_TO_DATE(#{underwritingYear},'%Y')
+        </if>
+        <if test="currencyKey!=null">
+            and basis.currency_key=#{currencyKey}
+        </if>
+        <if test="currency!=null">
+            and basis.currency=#{currency}
+        </if>
+        <if test="leadingReinsurerKey!=null">
+            and basis.leading_reinsurer_key=#{leadingReinsurerKey}
+        </if>
+        <if test="leadingReinsurer!=null">
+            and basis.leading_reinsurer=#{leadingReinsurer}
+        </if>
+        <if test="businessStatusKey!=null">
+            and basis.business_status_key=#{businessStatusKey}
+        </if>
+        <if test="businessStatus!=null">
+            and basis.business_status=#{businessStatus}
+        </if>
+        <if test="taxPercent!=null">
+            and basis.tax_percent=#{taxPercent}
+        </if>
+        <if test="taxSurchargePercent!=null">
+            and basis.tax_surcharge_percent=#{taxSurchargePercent}
+        </if>
+
+        <if test="breCreate!=null and breCreate != ''">
+            and basis.bre_create=#{breCreate}
+        </if>
+        <if test="breUpdate!=null and breUpdate != ''">
+            and basis.bre_update=#{breUpdate}
+        </if>
+        <if test="breApproval!=null and breApproval!= ''">
+            and basis.bre_approval=#{breApproval}
+        </if>
+        <if test="breQuoSum!=null and breQuoSum != ''">
+            and basis.bre_quo=#{breQuoSum}
+        </if>
+        <if test="breSplSum!=null and breSplSum != ''">
+            and basis.bre_spl_sum=#{breSplSum}
+        </if>
+        <if test="valueType!=null and valueType != ''">
+            and basis.value_type=#{valueType}
+        </if>
+        <if test="remarks1!=null">
+            and basis.remarks1=#{remarks1}
+        </if>
+        <if test="remarks2!=null">
+            and basis.remarks2=#{remarks2}
+        </if>
+        <if test="remarks3!=null">
+            and basis.remarks3=#{remarks3}
+        </if>
+    </select>
+
+    <select id="selectBreTreatyNonPropAllInfo" parameterType="com.example.entity.BreTreatAllInfoDto"
+            resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+        basis.bre_slip_number as "breSlipNumber",
+        basis.treaty_type_key as "treatyTypeKey",
+        basis.treaty_type as "treatyType",
+        basis.bre_dept_key as "breDeptKey",
+        basis.bre_dept as "breDept",
+        basis.type_of_business_key as "typeOfBusinessKey",
+        basis.type_of_business as "typeOfBusiness",
+        basis.bre_bound_no as "breBoundNo",
+        basis.ceding_company_key as "cedingCompanyKey",
+        basis.ceding_company as "cedingCompany",
+        basis.country_of_ceding_company as "countryOfCedingCompany",
+        basis.producing_broker_key as "producingBrokerKey",
+        basis.producing_broker as "producingBroker",
+        basis.country_of_producing_broker as "countryOfProducingBroker",
+        basis.treaty_name as "treatyName",
+        basis.inception_date as "inception",
+        DATE_FORMAT(basis.expiry_date,'%Y-%m-%d %H:%i:%s') as "expiry",
+        DATE_FORMAT(basis.underwriting_year,'%Y') as "underwritingYear",
+        basis.currency_key as "currencyKey",
+        basis.currency as "currency",
+        basis.leading_reinsurer_key as "leadingReinsurerKey",
+        basis.leading_reinsurer as "leadingReinsurer",
+        basis.business_status_key as "businessStatusKey",
+        basis.business_status as "businessStatus",
+        basis.tax_percent as "taxPercent",
+        basis.tax_surcharge_percent as "taxSurchargePercent",
+        basis.bre_create as "breCreate",
+        basis.bre_update as "breUpdate",
+        basis.bre_approval as "breApproval",
+        basis.bre_quo_sum as "breQuoSum",
+        basis.bre_spl_sum as "breSplSum",
+        basis value_type as "valueType",
+        basis.remarks1 as "remarks1",
+        basis.remarks2 as "remarks2",
+        basis.remarks3 as "remarks3",
+        nonProp.id as "nonPropId",
+        nonProp.bre_slip_number as "nonPropBreSlipNumber",
+        nonProp.layer as "nonPropLayer",
+        nonProp.gnpi as "nonPropGnpi",
+        nonProp.adjustable_rate as "nonPropAdjustableRate",
+        nonProp.deposit_premium as "nonPropDepositPremium",
+        nonProp.dp_percent as "nonPropDpPercent",
+        nonProp.minimum_premium as "nonPropMinimumPremium",
+        nonProp.mp_percent as "nonPropMpPercent",
+        nonProp.rate_on_line as "nonPropRateOnLine",
+        nonProp.reinstatement as "nonPropReinstatement",
+        nonProp.coverage as "nonPropCoverage",
+        reinsurer.id as "reinsurerId",
+        reinsurer.bre_slip_number as "reinsurerBreSlipNumber",
+        reinsurer.prop_id as "reinsurerPropId",
+        reinsurer.reinsurer as "reinsurer",
+        reinsurer.country_of_reinsurer as "countryOfReinsurer",
+        reinsurer.settlement_currency as "settlementCurrency",
+        reinsurer.placement_broker as "placementBroker",
+        reinsurer.country_of_placement_broker as "countryOfPlacementBroker",
+        reinsurer.bre_brokerage as "breBrokerage",
+        reinsurer.bre_brokerage_percent as "breBrokeragePercent",
+        reinsurer.other_fee_or_charge as "otherFeeOrCharge",
+        reinsurer.including_excluding_brokerage_vat as "includingExcludingBrokerageVat",
+        reinsurer.written_line as "writtenLine",
+        reinsurer.signed_line as "signedLine",
+        reinsurer.status_reinsurer as "statusReinsurer",
+        reinsurer.signing_date as "signing",
+        reinsurer.condition_reinsurer as "conditionReinsurer",
+        reinsurer.remarks as "reinsurerRemarks",
+        arrange.id as "arrangeId",
+        arrange.line_of_business as "lineOfBusiness",
+        arrange.arrange_section as "arrangeSection",
+        arrange.arrange_commission_for_quota_share as "arrangeCommissionForQuotaShare",
+        arrange.arrange_commission_for_surplus as "arrangeCommissionForSurplus"
+        from
+        bre_treaty_basis_info basis
+        LEFT JOIN
+        bre_treaty_non_prop_info nonProp
+        on basis.bre_slip_number = nonProp.bre_slip_number
+        LEFT JOIN
+        bre_treaty_reinsurer_info reinsurer
+        on nonProp.id=reinsurer.prop_id
+        LEFT JOIN
+        bre_treaty_arrange_info arrange
+        on reinsurer.id=arrange.prop_id
+        where 1=1
+
+        <if test="treatyTypeKey!=null">
+            and basis.treaty_type_key=#{treatyTypeKey}
+        </if>
+        <if test="treatyType!=null">
+            and basis.treaty_type=#{treatyType}
+        </if>
+        <if test="breDeptKey!=null">
+            and basis.bre_dept_key=#{breDeptKey}
+        </if>
+        <if test="breDept!=null">
+            and basis.bre_dept=#{breDept}
+        </if>
+        <if test="typeOfBusinessKey!=null">
+            and basis.type_of_business_key=#{typeOfBusinessKey}
+        </if>
+        <if test="typeOfBusiness!=null">
+            and basis.type_of_business=#{typeOfBusiness}
+        </if>
+        <if test="breSlipNumber!=null">
+            and basis.bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="breBoundNo!=null">
+            and basis.bre_bound_no=#{breBoundNo}
+        </if>
+        <if test="cedingCompanyKey!=null">
+            and basis.ceding_company_key=#{cedingCompanyKey}
+        </if>
+        <if test="cedingCompany!=null">
+            and basis.ceding_company=#{cedingCompany}
+        </if>
+        <if test="countryOfCedingCompany!=null">
+            and basis.country_of_ceding_company=#{countryOfCedingCompany}
+        </if>
+        <if test="producingBrokerKey!=null">
+            and basis.producing_broker_key=#{producingBrokerKey}
+        </if>
+        <if test="producingBroker!=null">
+            and basis.producing_broker=#{producingBroker}
+        </if>
+        <if test="countryOfProducingBroker!=null">
+            and basis.country_of_producing_broker=#{countryOfProducingBroker}
+        </if>
+        <if test="treatyName!=null">
+            and basis.treaty_name=#{treatyName}
+        </if>
+        <if test="inceptionDate!=null">
+            and basis.inception_date=STR_TO_DATE(#{inceptionDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="expiryDate!=null">
+            and basis.expiry_date=STR_TO_DATE(#{expiryDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="underwritingYear!=null">
+            and basis.underwriting_year=STR_TO_DATE(#{underwritingYear},'%Y')
+        </if>
+        <if test="currencyKey!=null">
+            and basis.currency_key=#{currencyKey}
+        </if>
+        <if test="currency!=null">
+            and basis.currency=#{currency}
+        </if>
+        <if test="leadingReinsurerKey!=null">
+            and basis.leading_reinsurer_key=#{leadingReinsurerKey}
+        </if>
+        <if test="leadingReinsurer!=null">
+            and basis.leading_reinsurer=#{leadingReinsurer}
+        </if>
+        <if test="businessStatusKey!=null">
+            and basis.business_status_key=#{businessStatusKey}
+        </if>
+        <if test="businessStatus!=null">
+            and basis.business_status=#{businessStatus}
+        </if>
+        <if test="taxPercent!=null">
+            and basis.tax_percent=#{taxPercent}
+        </if>
+        <if test="taxSurchargePercent!=null">
+            and basis.tax_surcharge_percent=#{taxSurchargePercent}
+        </if>
+
+        <if test="breCreate!=null and breCreate != ''">
+            and basis.bre_create=#{breCreate}
+        </if>
+        <if test="breUpdate!=null and breUpdate != ''">
+            and basis.bre_update=#{breUpdate}
+        </if>
+        <if test="breApproval!=null and breApproval!= ''">
+            and basis.bre_approval=#{breApproval}
+        </if>
+        <if test="breQuoSum!=null and breQuoSum != ''">
+            and basis.bre_quo=#{breQuoSum}
+        </if>
+        <if test="breSplSum!=null and breSplSum != ''">
+            and basis.bre_spl_sum=#{breSplSum}
+        </if>
+        <if test="valueType!=null and valueType != ''">
+            and basis.value_type=#{valueType}
+        </if>
+        <if test="remarks1!=null">
+            and basis.remarks1=#{remarks1}
+        </if>
+        <if test="remarks2!=null">
+            and basis.remarks2=#{remarks2}
+        </if>
+        <if test="remarks3!=null">
+            and basis.remarks3=#{remarks3}
+        </if>
+
+    </select>
+
+    <insert id="addBreTreatyBasisInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        insert into bre_treaty_basis_info(
+
+        <if test="treatyTypeKey!=null">
+            treaty_type_key,
+        </if>
+        <if test="treatyType!=null">
+            treaty_type,
+        </if>
+        <if test="breDeptKey!=null">
+            bre_dept_key,
+        </if>
+        <if test="breDept!=null">
+            bre_dept,
+        </if>
+        <if test="typeOfBusinessKey!=null">
+            type_of_business_key,
+        </if>
+        <if test="typeOfBusiness!=null">
+            type_of_business,
+        </if>
+        <if test="breBoundNo!=null">
+            bre_bound_no,
+        </if>
+        <if test="cedingCompanyKey!=null">
+            ceding_company_key,
+        </if>
+        <if test="cedingCompany!=null">
+            ceding_company,
+        </if>
+        <if test="countryOfCedingCompany!=null">
+            country_of_ceding_company,
+        </if>
+        <if test="producingBrokerKey!=null">
+            producing_broker_key,
+        </if>
+        <if test="producingBroker!=null">
+            producing_broker,
+        </if>
+        <if test="countryOfProducingBroker!=null">
+            country_of_producing_broker,
+        </if>
+        <if test="treatyName!=null">
+            treaty_name,
+        </if>
+        <if test="inceptionDate!=null and inceptionDate!=''">
+            inception_date,
+        </if>
+        <if test="expiryDate!=null and expiryDate!=''">
+            expiry_date ,
+        </if>
+        <if test="underwritingYear!=null and underwritingYear!=''">
+            underwriting_year,
+        </if>
+        <if test="currencyKey!=null">
+            currency_key,
+        </if>
+        <if test="currency!=null">
+            currency,
+        </if>
+        <if test="leadingReinsurerKey!=null">
+            leading_reinsurer_key,
+        </if>
+        <if test="leadingReinsurer!=null">
+            leading_reinsurer,
+        </if>
+        <if test="businessStatusKey!=null">
+            business_status_key,
+        </if>
+        <if test="businessStatus!=null">
+            business_status,
+        </if>
+        <if test="taxPercent!=null">
+            tax_percent,
+        </if>
+        <if test="taxSurchargePercent!=null">
+            tax_surcharge_percent,
+        </if>
+
+        <if test="breCreate!=null">
+            bre_create,
+        </if>
+        <if test="breUpdate!=null ">
+            bre_update,
+        </if>
+        <if test="breApproval!=null ">
+            bre_approval,
+        </if>
+        <if test="breQuoSum!=null ">
+            bre_quo,
+        </if>
+        <if test="breSplSum!=null">
+            bre_spl_sum,
+        </if>
+        <if test="valueType!=null">
+            value_type,
+        </if>
+        <if test="remarks1!=null">
+            remarks1,
+        </if>
+        <if test="remarks2!=null">
+            remarks2,
+        </if>
+        <if test="remarks3!=null">
+            remarks3,
+        </if>
+        bre_slip_number
+
+        )values(
+        <if test="treatyTypeKey!=null">
+            #{treatyTypeKey},
+        </if>
+        <if test="treatyType!=null">
+            #{treatyType},
+        </if>
+        <if test="breDeptKey!=null">
+            #{breDeptKey},
+        </if>
+        <if test="breDept!=null">
+            #{breDept},
+        </if>
+        <if test="typeOfBusinessKey!=null">
+            #{typeOfBusinessKey},
+        </if>
+        <if test="typeOfBusiness!=null">
+            #{typeOfBusiness},
+        </if>
+        <if test="breBoundNo!=null">
+            #{breBoundNo},
+        </if>
+        <if test="cedingCompanyKey!=null">
+            #{cedingCompanyKey},
+        </if>
+        <if test="cedingCompany!=null">
+            #{cedingCompany},
+        </if>
+        <if test="countryOfCedingCompany!=null">
+            #{countryOfCedingCompany},
+        </if>
+        <if test="producingBrokerKey!=null">
+            #{producingBrokerKey},
+        </if>
+        <if test="producingBroker!=null">
+            #{producingBroker},
+        </if>
+        <if test="countryOfProducingBroker!=null">
+            #{countryOfProducingBroker},
+        </if>
+        <if test="treatyName!=null">
+            #{treatyName},
+        </if>
+        <if test="inceptionDate!=null and inceptionDate !=''">
+            str_to_date(#{inceptionDate},'%Y-%m-%d %H:%i:%s'),
+        </if>
+        <if test="expiryDate!=null and expiryDate!=''">
+            str_to_date(#{expiryDate},'%Y-%m-%d %H:%i:%s'),
+        </if>
+        <if test="underwritingYear!=null and underwritingYear!=''">
+            str_to_date(#{underwritingYear},'%Y'),
+        </if>
+        <if test="currencyKey!=null">
+            #{currencyKey},
+        </if>
+        <if test="currency!=null">
+            #{currency},
+        </if>
+        <if test="leadingReinsurerKey!=null">
+            #{leadingReinsurerKey},
+        </if>
+        <if test="leadingReinsurer!=null">
+            #{leadingReinsurer},
+        </if>
+        <if test="businessStatusKey!=null">
+            #{businessStatusKey},
+        </if>
+        <if test="businessStatus!=null">
+            #{businessStatus},
+        </if>
+        <if test="taxPercent!=null">
+            #{taxPercent},
+        </if>
+        <if test="taxSurchargePercent!=null">
+            #{taxSurchargePercent},
+        </if>
+
+        <if test="breCreate!=null">
+            #{breCreate},
+        </if>
+        <if test="breUpdate!=null ">
+            #{breUpdate},
+        </if>
+        <if test="breApproval!=null ">
+            #{breApproval},
+        </if>
+        <if test="breQuoSum!=null ">
+            #{breQuoSum},
+        </if>
+        <if test="breSplSum!=null">
+            #{breSplSum},
+        </if>
+        <if test="valueType!=null">
+            #{valueType},
+        </if>
+
+        <if test="remarks1!=null">
+            #{remarks1},
+        </if>
+        <if test="remarks2!=null">
+            #{remarks2},
+        </if>
+        <if test="remarks3!=null">
+            #{remarks3},
+        </if>
+
+        #{breSlipNumber}
+
+        )
+    </insert>
+
+    <insert id="addBreTreatyPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+
+        insert into bre_treaty_prop_info(
+        <if test="lineOfBusiness != null and lineOfBusiness !=''">
+            line_of_business ,
+        </if>
+
+        <if test="breSlipNumber != null and breSlipNumber != '' ">
+            bre_slip_number ,
+        </if>
+        <if test="sectionName !=null  and sectionName ">
+            section_name,
+        </if>
+        <if test="grossRetention!=null">
+            gross_retention,
+        </if>
+        <if test="cessionForQuotaShare!=null">
+            cession_for_quota_share,
+        </if>
+        <if test="lineSurplus!=null">
+            line_surplus,
+        </if>
+        <if test="commissionForQuotaShare!=null">
+            commission_for_quota_share,
+        </if>
+        <if test="commissionForSurplus!=null">
+            commission_for_surplus,
+        </if>
+        <if test="fixedOrProvisionalCommission!=null">
+            fixed_or_provisional_commission,
+        </if>
+        <if test="epiForQuotaShare!=null">
+            epi_for_quota_share,
+        </if>
+        <if test="epiForSurplus!=null">
+            epi_for_surplus,
+        </if>
+        <if test="eventLimit!=null">
+            event_limit,
+        </if>
+        <if test="expiryDateOfExtension!=null and expiryDateOfExtension !=''">
+            DATE_FORMAT(expiry_date,'%Y-%m-%d %H:%i:%s')_of_extension,
+        </if>
+        <if test="underwritingPeriod!=null">
+            underwriting_period,
+        </if>
+        id
+        )values(
+
+        <if test="lineOfBusiness != null and lineOfBusiness !=''">
+            #{lineOfBusiness} ,
+        </if>
+        <if test="breSlipNumber!=null and lineOfBusiness !=''">
+            #{breSlipNumber},
+        </if>
+        <if test="sectionName!=null">
+            #{sectionName},
+        </if>
+        <if test="grossRetention!=null">
+            CAST(#{grossRetention} as DECIMAL(9,2)) ,
+        </if>
+        <if test="cessionForQuotaShare!=null">
+            #{cessionForQuotaShare},
+        </if>
+        <if test="lineSurplus!=null">
+            #{lineSurplus},
+        </if>
+        <if test="commissionForQuotaShare!=null">
+            #{commissionForQuotaShare},
+        </if>
+        <if test="commissionForSurplus!=null">
+            #{commissionForSurplus},
+        </if>
+        <if test="fixedOrProvisionalCommission!=null">
+            #{fixedOrProvisionalCommission},
+        </if>
+        <if test="epiForQuotaShare!=null">
+            #{epiForQuotaShare},
+        </if>
+        <if test="epiForSurplus!=null">
+            #{epiForSurplus},
+        </if>
+        <if test="eventLimit!=null">
+            #{eventLimit},
+        </if>
+        <if test="expiryDateOfExtension!=null and expiryDateOfExtension !=''">
+            str_to_date(#{expiryDateOfExtension},'%Y-%m-%d %H:%i:%s'),
+        </if>
+        <if test="underwritingPeriod!=null">
+            #{underwritingPeriod},
+        </if>
+
+        <if test="propId !=null and propId !=''">
+            #{propId}
+        </if>
+        <if test="propId ==null or propId ==''">
+            currval('bre_treaty_prop_info')
+        </if>
+
+        )
+
+    </insert>
+
+    <select id="getTreatyPropInfoId" resultType="java.lang.String">
+            select  currval('bre_treaty_prop_info')
+    </select>
+
+    <select id="getTreatyNonPropInfoId" resultType="java.lang.String">
+            select  currval('bre_treaty_non_prop_info')
+    </select>
+    <insert id="addBreTreatyArrangeInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        insert into bre_treaty_arrange_info(
+        bre_slip_number,
+        prop_id,
+        reinsurer_id,
+        line_of_business,
+        arrange_section,
+        arrange_commission_for_quota_share,
+        arrange_commission_for_surplus,
+        id
+        )
+        select
+        #{breSlipNumber},
+        id,
+        #{reinsurerId},
+        line_of_business,
+        section_name,
+        commission_for_quota_share,
+        commission_for_surplus,
+        currval('bre_treaty_arrange_info')
+        from bre_treaty_prop_info where 1=1
+        <if test="breSlipNumber!=null and breSlipNumber != '' ">
+            and bre_Slip_Number= #{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !='' ">
+            and id= #{propId}
+        </if>
+
+    </insert>
+
+
+    <insert id="addBreTreatyReinsureInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        insert into bre_treaty_reinsurer_info(
+
+        <if test="breSlipNumber!=null and breSlipNumber!=''">
+            bre_slip_number,
+        </if>
+        <if test="propId!=null and propId!=''" >
+            prop_id,
+        </if>
+        <if test="reinsurer!=null and reinsurer!=''">
+            reinsurer,
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer!=''">
+            country_of_reinsurer,
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency!=''">
+            settlement_currency,
+        </if>
+        <if test="placementBroker!=null and placementBroker!=''">
+            placement_broker,
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker!=''">
+            country_of_placement_broker,
+        </if>
+        <if test="breBrokerage!=null and breBrokerage!=''">
+            bre_brokerage,
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent!=''">
+            bre_brokerage_percent,
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge!=''">
+            other_fee_or_charge,
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat!=''">
+            including_excluding_brokerage_vat,
+        </if>
+        <if test="writtenLine!=null and writtenLine!=''" >
+            written_line,
+        </if>
+        <if test="signedLine!=null and signedLine!=''">
+            signed_line,
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer!=''">
+            status_reinsurer,
+        </if>
+        <if test="signingDate!=null and signingDate!=''">
+            signing_date,
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer!=''">
+            condition_reinsurer,
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            remarks,
+        </if>
+        id
+        )values(
+
+        <if test="breSlipNumber!=null  and breSlipNumber!=''">
+            #{breSlipNumber},
+        </if>
+        <if test="propId!=null and propId!=''">
+            #{propId},
+        </if>
+        <if test="reinsurer!=null and reinsurer!=''">
+            #{reinsurer},
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer!=''">
+            #{countryOfReinsurer},
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency!=''">
+            #{settlementCurrency},
+        </if>
+        <if test="placementBroker!=null and placementBroker!=''">
+            #{placementBroker},
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker!=''">
+            #{countryOfPlacementBroker},
+        </if>
+        <if test="breBrokerage!=null and breBrokerage!=''">
+            CAST(#{breBrokerage} as DECIMAL(9,2)),
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent!=''">
+            #{breBrokeragePercent},
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge!=''">
+            #{otherFeeOrCharge},
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat!=''">
+            #{includingExcludingBrokerageVat},
+        </if>
+        <if test="writtenLine!=null and writtenLine!=''">
+            #{writtenLine},
+        </if>
+        <if test="signedLine!=null and signedLine!=''">
+            #{signedLine},
+        </if>
+        <if test="statusReinsurer!=null  and statusReinsurer!=''">
+            #{statusReinsurer},
+        </if>
+        <if test="signingDate!=null and signingDate!=''">
+            str_to_date(#{signingDate},'%Y-%m-%d %H:%i:%s'),
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer!=''">
+            #{conditionReinsurer},
+        </if>
+        <if test="remarks!=null and remarks!=''">
+            #{remarks},
+        </if>
+        #{reinsurerId}
+        )
+    </insert>
+
+    <update id="updateBreTreatyNonPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        update bre_treaty_non_prop_info set id=id
+        <if test="nonPropLayer!=null and nonPropLayer !=''">
+            , layer=#{nonPropLayer}
+        </if>
+        <if test="nonPropGnpi!=null and nonPropGnpi !=''">
+            , gnpi=#{nonPropGnpi}
+        </if>
+        <if test="nonPropAdjustableRate!=null and nonPropAdjustableRate !=''">
+            , adjustable_rate=#{nonPropAdjustableRate}
+        </if>
+        <if test="nonPropDepositPremium!=null and nonPropDepositPremium !=''">
+            , deposit_premium=#{nonPropDepositPremium}
+        </if>
+        <if test="nonPropDpPercent!=null and nonPropDpPercent !=''">
+            , dp_percent=#{nonPropDpPercent}
+        </if>
+        <if test="nonPropMinimumPremium!=null and nonPropMinimumPremium !=''">
+            , minimum_premium=#{nonPropMinimumPremium}
+        </if>
+        <if test="nonPropMpPercent!=null and nonPropMpPercent !=''">
+            , mp_percent=#{nonPropMpPercent}
+        </if>
+        <if test="nonPropRateOnLine!=null and nonPropRateOnLine !=''">
+            , rate_on_line=#{nonPropRateOnLine}
+        </if>
+        <if test="nonPropReinstatement!=null and nonPropReinstatement !=''">
+            , reinstatement=#{nonPropReinstatement}
+        </if>
+        <if test="nonPropCoverage!=null and nonPropCoverage !=''">
+            , coverage=#{nonPropCoverage}
+        </if>
+        where 1=1
+        <if test="nonPropId!=null and nonPropId !=''">
+            and id=#{nonPropId}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+    </update>
+
+    <insert id="addBreTreatyNonPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        insert into bre_treaty_non_prop_info(
+        <if test="breSlipNumber!=null">
+            bre_slip_number,
+        </if>
+        <if test="nonPropLayer!=null and nonPropLayer != ''">
+            layer,
+        </if>
+        <if test="nonPropGnpi!=null and nonPropGnpi != ''">
+            gnpi,
+        </if>
+        <if test="nonPropAdjustableRate!=null and nonPropAdjustableRate!=''">
+            adjustable_rate,
+        </if>
+        <if test="nonPropDepositPremium!=null and nonPropDepositPremium!=''">
+            deposit_premium,
+        </if>
+        <if test="nonPropDpPercent!=null and nonPropDpPercent!=''">
+            dp_percent,
+        </if>
+        <if test="nonPropMinimumPremium!=null and nonPropDpPercent!='' ">
+            minimum_premium,
+        </if>
+        <if test="nonPropMpPercent!=null and nonPropMpPercent!=''">
+            mp_percent,
+        </if>
+        <if test="nonPropRateOnLine!=null and nonPropRateOnLine!=''">
+            rate_on_line,
+        </if>
+        <if test="nonPropReinstatement!=null and nonPropReinstatement!=''">
+            reinstatement,
+        </if>
+        <if test="nonPropCoverage!=null and nonPropCoverage!=''">
+            coverage ,
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber!='' and nonPropLimitPercentage!=null and  nonPropLimitPercentage!=''">
+            non_prop_limit_number ,
+            non_Prop_Limit_Percentage  ,
+            non_prop_Limit,
+        </if>
+        id
+        )values(
+
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            #{breSlipNumber},
+        </if>
+        <if test="nonPropLayer !=null and nonPropLayer !=''">
+            CAST(#{nonPropLayer} as DECIMAL(9,2)),
+        </if>
+        <if test="nonPropGnpi!=null and nonPropGnpi !=''">
+            CAST(#{nonPropGnpi} as DECIMAL(9,2)),
+        </if>
+        <if test="nonPropAdjustableRate!=null and nonPropAdjustableRate !=''">
+            #{nonPropAdjustableRate},
+        </if>
+        <if test="nonPropDepositPremium!=null and nonPropDepositPremium !=''">
+            CAST(#{nonPropDepositPremium} as DECIMAL(9,2)),
+        </if>
+        <if test="nonPropDpPercent!=null and nonPropDpPercent !=''">
+            #{nonPropDpPercent},
+        </if>
+        <if test="nonPropMinimumPremium!=null and nonPropMinimumPremium !=''">
+            CAST(#{nonPropMinimumPremium} as DECIMAL(9,2)),
+        </if>
+        <if test="nonPropMpPercent!=null and nonPropMpPercent !=''">
+            #{nonPropMpPercent},
+        </if>
+        <if test="nonPropRateOnLine!=null and nonPropRateOnLine !=''">
+            #{nonPropRateOnLine},
+        </if>
+        <if test="nonPropReinstatement!=null and nonPropReinstatement !=''">
+            #{nonPropReinstatement},
+        </if>
+        <if test="nonPropCoverage!=null and nonPropCoverage !=''">
+            #{nonPropCoverage} ,
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber!='' and nonPropLimitPercentage!=null and  nonPropLimitPercentage!=''">
+            #{nonPropLimitNumber} ,
+            #{nonPropLimitPercentage} ,
+            #{nonPropLimit},
+        </if>
+        #{propId}
+        )
+    </insert>
+
+
+    <select id="selectBreTreatyPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto"
+            resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+        id as "propId",
+        bre_slip_number as "breSlipNumber",
+        section_name as "sectionName",
+        gross_retention as "grossRetention",
+        cession_for_quota_share as "cessionForQuotaShare",
+        line_surplus as "lineSurplus",
+        commission_for_quota_share as "commissionForQuotaShare",
+        commission_for_surplus as "commissionForSurplus",
+        fixed_or_provisional_commission as "fixedOrProvisionalCommission",
+        epi_for_quota_share as "epiForQuotaShare",
+        epi_for_surplus as "epiForSurplus",
+        event_limit as "eventLimit",
+        DATE_FORMAT(expiry_date_of_extension,'%Y-%m-%d %H:%i:%s') as "expiryDateOfExtension",
+        underwriting_period as "underwritingPeriod"
+        from bre_treaty_prop_info i
+        where 1=1
+        <if test="propId != '' and propId!= null">
+            and i.id=#{propId}
+        </if>
+
+        <if test="breSlipNumber != '' and breSlipNumber!= null">
+            and i.bre_slip_number=#{breSlipNumber}
+        </if>
+
+        <if test="sectionName != '' and sectionName!= null">
+            and i.section_name=#{sectionName}
+        </if>
+
+        <if test="grossRetention != '' and grossRetention!= null">
+            and i.gross_retention=#{grossRetention}
+        </if>
+
+        <if test="cessionForQuotaShare != '' and cessionForQuotaShare!= null">
+            and i.cession_for_quota_share=#{cessionForQuotaShare}
+        </if>
+
+        <if test="lineSurplus != '' and lineSurplus!= null">
+            and i.line_surplus=#{lineSurplus}
+        </if>
+
+        <if test="commissionForQuotaShare != '' and commissionForQuotaShare!= null">
+            and i.commission_for_quota_share=#{commissionForQuotaShare}
+        </if>
+
+        <if test="commissionForSurplus != '' and commissionForSurplus!= null">
+            and i.commission_for_surplus=#{commissionForSurplus}
+        </if>
+
+        <if test="fixedOrProvisionalCommission != '' and fixedOrProvisionalCommission!= null">
+            and i.fixed_or_provisional_commission=#{fixedOrProvisionalCommission}
+        </if>
+
+        <if test="epiForQuotaShare != '' and epiForQuotaShare!= null">
+            and i.epi_for_quota_share=#{epiForQuotaShare}
+        </if>
+
+        <if test="epiForSurplus != '' and epiForSurplus!= null">
+            and i.epi_for_surplus=#{epiForSurplus}
+        </if>
+
+        <if test="eventLimit != '' and eventLimit!= null">
+            and i.event_limit=#{eventLimit}
+        </if>
+
+        <if test="expiryDateOfExtension != '' and expiryDateOfExtension!= null">
+            and i.expiry_date_of_extension=str_to_date(#{expiryDateOfExtension},'%Y-%m-%d %H:%i:%s')
+        </if>
+
+        <if test="underwritingPeriod != '' and underwritingPeriod!= null">
+            and i.underwriting_period=#{underwritingPeriod}
+        </if>
+
+    </select>
+    <update id="updateBreTreatyPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        update bre_treaty_prop_info set bre_slip_number= bre_slip_number
+        <if test="sectionName!=null">
+            , section_name=#{sectionName}
+        </if>
+        <if test="grossRetention!=null">
+            , gross_retention=#{grossRetention}
+        </if>
+        <if test="cessionForQuotaShare!=null">
+            , cession_for_quota_share=#{cessionForQuotaShare}
+        </if>
+        <if test="lineSurplus!=null">
+            , line_surplus=#{lineSurplus}
+        </if>
+        <if test="commissionForQuotaShare!=null">
+            , commission_for_quota_share=#{commissionForQuotaShare}
+        </if>
+        <if test="commissionForSurplus!=null">
+            , commission_for_surplus=#{commissionForSurplus}
+        </if>
+        <if test="fixedOrProvisionalCommission!=null">
+            ,fixed_or_provisional_commission=#{fixedOrProvisionalCommission}
+        </if>
+        <if test="epiForQuotaShare!=null">
+            , epi_for_quota_share=#{epiForQuotaShare}
+        </if>
+        <if test="epiForSurplus!=null">
+            , epi_for_surplus=#{epiForSurplus}
+        </if>
+        <if test="eventLimit!=null">
+            , event_limit=#{eventLimit}
+        </if>
+        <if test="expiryDateOfExtension!=null and expiryDateOfExtension !=''">
+            , expiry_date_of_extension=str_to_date(#{expiryDateOfExtension},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="underwritingPeriod!=null">
+            , underwriting_period=#{underwritingPeriod}
+        </if>
+        where 1=1
+        <if test="propId!=null">
+            and id=#{propId}
+        </if>
+        <if test="breSlipNumber!=null">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+
+    </update>
+
+
+    <update id="updateBreTreatyBasisInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        update bre_treaty_basis_info set bre_slip_number=bre_slip_number
+        <if test="treatyTypeKey!=null and treatyTypeKey !=''">
+            , treaty_type_key=#{treatyTypeKey}
+        </if>
+        <if test="treatyType!=null and treatyType !=''">
+            , treaty_type=#{treatyType}
+        </if>
+        <if test="breDeptKey!=null and breDeptKey !=''">
+            , bre_dept_key=#{breDeptKey}
+        </if>
+        <if test="breDept!=null and breDept !=''">
+            , bre_dept=#{breDept}
+        </if>
+        <if test="typeOfBusinessKey!=null and typeOfBusinessKey !=''">
+            , type_of_business_key=#{typeOfBusinessKey}
+        </if>
+        <if test="typeOfBusiness!=null and typeOfBusiness !=''">
+            , type_of_business=#{typeOfBusiness}
+        </if>
+        <if test="breBoundNo!=null and breBoundNo !=''">
+            , bre_bound_no=#{breBoundNo}
+        </if>
+        <if test="cedingCompanyKey!=null and cedingCompanyKey !=''">
+            , ceding_company_key=#{cedingCompanyKey}
+        </if>
+        <if test="cedingCompany!=null and cedingCompany !=''">
+            , ceding_company=#{cedingCompany}
+        </if>
+        <if test="countryOfCedingCompany!=null and countryOfCedingCompany !=''">
+            , country_of_ceding_company=#{countryOfCedingCompany}
+        </if>
+        <if test="producingBrokerKey!=null and producingBrokerKey !=''">
+            , producing_broker_key=#{producingBrokerKey}
+        </if>
+        <if test="producingBroker!=null and producingBroker !=''">
+            , producing_broker=#{producingBroker}
+        </if>
+        <if test="countryOfProducingBroker!=null and countryOfProducingBroker !=''">
+            , country_of_producing_broker=#{countryOfProducingBroker}
+        </if>
+        <if test="treatyName!=null and treatyName !=''">
+            , treaty_name=#{treatyName}
+        </if>
+        <if test="inceptionDate!=null and inceptionDate !=''">
+            , inception_date= str_to_date(#{inceptionDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="expiryDate!=null and expiryDate !=''">
+            , expiry_date=str_to_date(#{expiryDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="underwritingYear!=null and underwritingYear !=''">
+            , underwriting_year= str_to_date(#{underwritingYear},'%Y')
+        </if>
+        <if test="currencyKey!=null and currencyKey !=''">
+            , currency_key=#{currencyKey}
+        </if>
+        <if test="currency!=null and currency !=''">
+            , currency=#{currency}
+        </if>
+        <if test="leadingReinsurerKey!=null and leadingReinsurerKey !=''">
+            , leading_reinsurer_key=#{leadingReinsurerKey}
+        </if>
+        <if test="leadingReinsurer!=null and leadingReinsurer !=''">
+            , leading_reinsurer=#{leadingReinsurer}
+        </if>
+        <if test="businessStatusKey!=null and businessStatusKey !=''">
+            , business_status_key=#{businessStatusKey}
+        </if>
+        <if test="businessStatus!=null and businessStatus !=''">
+            , business_status=#{businessStatus}
+        </if>
+        <if test="originalCedant!=null and originalCedant !=''">
+            , original_cedant=#{originalCedant}
+        </if>
+        <if test="countryOfOriginalCedant!=null and countryOfOriginalCedant !=''">
+            , country_of_original_cedant=#{countryOfOriginalCedant}
+        </if>
+        <if test="taxPercent!=null and taxPercent !=''">
+            , tax_percent=#{taxPercent}
+        </if>
+        <if test="taxSurchargePercent!=null and taxSurchargePercent !=''">
+            , tax_surcharge_percent=#{taxSurchargePercent}
+        </if>
+
+        <if test="breCreate!=null and breCreate != ''">
+            , bre_create=#{breCreate}
+        </if>
+        <if test="breUpdate!=null and breUpdate != ''">
+            , bre_update=#{breUpdate}
+        </if>
+        <if test="breApproval!=null and breApproval!= ''">
+            , bre_approval=#{breApproval}
+        </if>
+        <if test="breQuoSum!=null and breQuoSum != ''">
+            , bre_quo=#{breQuoSum}
+        </if>
+        <if test="breSplSum!=null and breSplSum != ''">
+            , bre_spl_sum=#{breSplSum}
+        </if>
+        <if test="valueType!=null and valueType != ''">
+            ,value_type=#{valueType}
+        </if>
+
+        <if test="remarks1!=null and remarks1 !=''">
+            , remarks1=#{remarks1}
+        </if>
+        <if test="remarks2!=null and remarks2 !=''">
+            , remarks2=#{remarks2}
+        </if>
+        <if test="remarks3!=null and remarks3 !=''">
+            , remarks3=#{remarks3}
+        </if>
+        where
+        1=1
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+
+    </update>
+
+    <select id="selectBreTreatyArrangeAllList" parameterType="com.example.entity.BreTreatAllInfoDto"
+            resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+            reinsurer.id as "reinsurerId",
+            reinsurer.bre_slip_number as "breSlipNumber",
+            reinsurer.prop_id as "reinsurerPropId",
+            reinsurer.reinsurer as "reinsurer",
+            reinsurer.country_of_reinsurer as "countryOfReinsurer",
+            reinsurer.settlement_currency as "settlementCurrency",
+            reinsurer.placement_broker as "placementBroker",
+            reinsurer.country_of_placement_broker as "countryOfPlacementBroker",
+            reinsurer.bre_brokerage as "breBrokerage",
+            reinsurer.bre_brokerage_percent as "breBrokeragePercent",
+            reinsurer.other_fee_or_charge as "otherFeeOrCharge",
+            reinsurer.including_excluding_brokerage_vat as "includingExcludingBrokerageVat",
+            reinsurer.written_line as "writtenLine",
+            reinsurer.signed_line as "signedLine",
+            reinsurer.status_reinsurer as "statusReinsurer",
+            reinsurer.signing_date as "signing",
+            reinsurer.condition_reinsurer as "conditionReinsurer",
+            reinsurer.remarks as "reinsurerRemarks",
+            arrange.id as "arrangeId",
+            arrange.bre_slip_number as "arrangeBreSlipNumber",
+            arrange.prop_id as "arrangePropId",
+            arrange.reinsurer_id as "arrangeReinsurerId",
+            arrange.line_of_business as "arrangeLineOfBusiness",
+            arrange.arrange_section as "arrangeSection",
+            arrange.arrange_commission_for_quota_share  as "arrangeCommissionForQuotaShare",
+            arrange.arrange_commission_for_surplus as "arrangeCommissionForSurplus",
+            arrange.arrange_section_all as "arrangeSectionAll"
+			from
+          bre_treaty_reinsurer_info reinsurer
+      LEFT JOIN
+        bre_treaty_arrange_info arrange
+         on reinsurer.id=arrange.reinsurer_id
+       where 1=1 and  reinsurer.bre_slip_number=#{breSlipNumber}
+  </select>
+
+    <select  id="getBreTreatyNonPropInfoList" parameterType="com.example.entity.BreTreatAllInfoDto" resultType="com.example.entity.BreTreatAllInfoDto">
+        select
+        id as "nonPropId",
+        bre_slip_number as "breSlipNumber",
+        layer as "nonPropLayer",
+        gnpi as "nonPropGnpi",
+        adjustable_rate as "nonPropAdjustableRate",
+        deposit_premium as "nonPropDepositPremium",
+        dp_percent as "nonPropDpPercent",
+        minimum_premium as "nonPropMinimumPremium",
+        mp_percent as "nonPropMpPercent",
+        rate_on_line as "nonPropRateOnLine",
+        reinstatement as "nonPropReinstatement",
+        coverage as "nonPropCoverage",
+        non_Prop_Limit_Number as "nonPropLimitNumber",
+        non_Prop_Limit_Percentage as "nonPropLimitPercentage",
+        non_Prop_Limit as "nonPropLimit"
+        from bre_treaty_non_prop_info
+        where 1=1
+     <if test="nonPropId!=null and nonPropId !=''">
+        and  id=#{nonPropId}
+    </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and  bre_slip_number=#{breSlipNumber}
+        </if>
+    </select>
+
+</mapper>

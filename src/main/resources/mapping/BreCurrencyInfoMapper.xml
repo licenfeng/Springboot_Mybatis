@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreCurrencyInfoMapper">
+    <update id="updateBreCurrencyInfoInfo" parameterType="com.example.entity.BreCurrencyInfoDto">
+        update bre_currency_info set id=id
+        <if test="entity!=null and entity !=''">
+            , entity=#{entity}
+        </if>
+        <if test="currency!=null and currency !=''">
+            , currency=#{currency}
+        </if>
+        <if test="alphabeticCode!=null and alphabeticCode !=''">
+            , alphabetic_code=#{alphabeticCode}
+        </if>
+        <if test="numericCode!=null and numericCode !=''">
+            , numeric_code=#{numericCode}
+        </if>
+        <if test="minorUnit!=null and minorUnit !=''">
+            , minor_unit=#{minorUnit}
+        </if>
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </update>
+    <select id="getBreCurrencyInfoList" parameterType="com.example.entity.BreCurrencyInfoDto"
+            resultType="com.example.entity.BreCurrencyInfoDto">
+        select
+        number as "number",
+        entity as "entity",
+        currency as "currency",
+        alphabetic_code as "alphabeticCode",
+        numeric_code as "numericCode",
+        minor_unit as "minorUnit",
+        id as "id"
+        from bre_currency_info
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+        <if test="entity!=null and entity !=''">
+            and entity=#{entity}
+        </if>
+        <if test="currency!=null and currency !=''">
+            and currency=#{currency}
+        </if>
+        <if test="alphabeticCode!=null and alphabeticCode !=''">
+            and alphabetic_code=#{alphabeticcode}
+        </if>
+        <if test="numericCode!=null and numericCode !=''">
+            and numeric_code=#{numericcode}
+        </if>
+        <if test="minorUnit!=null and minorUnit !=''">
+            and minor_unit=#{minorunit}
+        </if>
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </select>
+    <insert id="addBreCurrencyInfoInfo" parameterType="com.example.entity.BreCurrencyInfoDto">
+        insert into bre_currency_info(
+        <if test="number!=null and number != ''">
+            number
+        </if>
+        <if test="entity!=null and entity != ''">
+            , entity
+        </if>
+        <if test="currency!=null and currency != ''">
+            , currency
+        </if>
+        <if test="alphabeticCode!=null and alphabeticCode != ''">
+            , alphabetic_code
+        </if>
+        <if test="numericCode!=null and numericCode != ''">
+            , numeric_code
+        </if>
+        <if test="minorUnit!=null and minorUnit != ''">
+            , minor_unit
+        </if>
+        , id
+        ) values (
+        <if test="number!=null and number != ''">
+            #{number}
+        </if>
+        <if test="entity!=null and entity != ''">
+            , #{entity}
+        </if>
+        <if test="currency!=null and currency != ''">
+            , #{currency}
+        </if>
+        <if test="alphabeticCode!=null and alphabeticCode != ''">
+            , #{alphabeticCode}
+        </if>
+        <if test="numericCode!=null and numericCode != ''">
+            , #{numericCode}
+        </if>
+        <if test="minorUnit!=null and minorUnit != ''">
+            , #{minorUnit}
+        </if>
+        , currval('bre_currency_info'))
+    </insert>
+    <delete id="delBreCurrencyInfoInfo" parameterType="com.example.entity.BreCurrencyInfoDto">
+        delete from bre_currency_info
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+        <if test="entity!=null and entity !=''">
+            and entity=#{entity}
+        </if>
+        <if test="currency!=null and currency !=''">
+            and currency=#{currency}
+        </if>
+        <if test="alphabeticCode!=null and alphabeticCode !=''">
+            and alphabetic_code=#{alphabeticcode}
+        </if>
+        <if test="numericCode!=null and numericCode !=''">
+            and numeric_code=#{numericcode}
+        </if>
+        <if test="minorUnit!=null and minorUnit !=''">
+            and minor_unit=#{minorunit}
+        </if>
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </delete>
+
+    <insert id="insertBreCurrencyInfoInfoBatch" parameterType="java.util.List">
+        insert into bre_currency_info(
+        number
+        , entity
+        , currency
+        , alphabetic_code
+        , numeric_code
+        , minor_unit
+        , id
+        ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.number}
+            ,#{item.entity}
+            ,#{item.currency}
+            ,#{item.alphabeticCode}
+            ,#{item.numericCode}
+            ,#{item.minorUnit}
+            , currval('bre_currency_info')
+            )
+        </foreach>
+
+    </insert>
+
+
+</mapper>

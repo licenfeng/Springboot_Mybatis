@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreCustomerCompanyInfoMapper">
+
+    <select id="getBreCustomerCompanyInfoList" parameterType="com.example.entity.BreCustomerCompanyInfoDto"
+            resultType="com.example.entity.BreCustomerCompanyInfoDto">
+        select
+        number_id as "numberId",
+        chinese_name as "chineseName",
+        chinese_abbreviation as "chineseAbbreviation",
+        english_name as "englishName",
+        english_abbreviation as "englishAbbreviation",
+        countries_and_regions as "countriesAndRegions",
+        domestic_and_foreign as "domesticAndForeign",
+        organization_type as "organizationType",
+        contract_billing_requirements as "contractBillingRequirements",
+        billing_principle as "billingPrinciple",
+        fault_tolerance_of_billing as "faultToleranceOfBilling",
+        settlement_principle as "settlementPrinciple",
+        settlement_currency as "settlementCurrency",
+        email_suffix as "emailSuffix",
+        address as "address",
+        id as "id"
+        from bre_customer_company_info where 1=1
+        <if test="numberId!=null and numberId!=''">
+            and number_id=#{numberId}
+        </if>
+        <if test="chineseName!=null and chineseName!=''">
+            and chinese_name=#{chineseName}
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation!=''">
+            and chinese_abbreviation=#{chineseAbbreviation}
+        </if>
+        <if test="englishName!=null and englishName!=''">
+            and english_name=#{englishName}
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation!=''">
+            and english_abbreviation=#{englishAbbreviation}
+        </if>
+        <if test="countriesAndRegions!=null and countriesAndRegions!=''">
+            and countries_and_regions=#{countriesAndRegions}
+        </if>
+        <if test="domesticAndForeign!=null and domesticAndForeign!=''">
+            and domestic_and_foreign=#{domesticAndForeign}
+        </if>
+        <if test="organizationType!=null and organizationType!=''">
+            and organization_type=#{organizationType}
+        </if>
+        <if test="contractBillingRequirements!=null and contractBillingRequirements!=''">
+            and contract_billing_requirements=#{contractBillingRequirements}
+        </if>
+        <if test="billingPrinciple!=null and billingPrinciple!=''">
+            and billing_principle=#{billingPrinciple}
+        </if>
+        <if test="faultToleranceOfBilling!=null and faultToleranceOfBilling!=''">
+            and fault_tolerance_of_billing=#{faultToleranceOfBilling}
+        </if>
+        <if test="settlementPrinciple!=null and settlementPrinciple!=''">
+            and settlement_principle=#{settlementPrinciple}
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency!=''">
+            and settlement_currency=#{settlementCurrency}
+        </if>
+        <if test="emailSuffix!=null and emailSuffix!=''">
+            and email_suffix=#{emailSuffix}
+        </if>
+        <if test="address!=null and address!=''">
+            and address=#{address}
+        </if>
+        <if test="id!=null and id!=''">
+            and id=#{id}
+        </if>
+
+    </select>
+
+    <insert id="addBreCustomerCompanyInfo" parameterType="com.example.entity.BreCustomerCompanyInfoDto">
+        insert into bre_customer_company_info(
+            number_id,
+            chinese_name,
+            chinese_abbreviation,
+            english_name,
+            english_abbreviation,
+            countries_and_regions,
+            domestic_and_foreign,
+            organization_type,
+            contract_billing_requirements,
+            billing_principle,
+            fault_tolerance_of_billing,
+            settlement_principle,
+            settlement_currency,
+            email_suffix,
+            address,
+            id
+        )values(
+            #{numberId},
+            #{chineseName},
+            #{chineseAbbreviation},
+            #{englishName},
+            #{englishAbbreviation},
+            #{countriesAndRegions},
+            #{domesticAndForeign},
+            #{organizationType},
+            #{contractBillingRequirements},
+            #{billingPrinciple},
+            #{faultToleranceOfBilling},
+            #{settlementPrinciple},
+            #{settlementCurrency},
+            #{emailSuffix},
+            #{address},
+            currval('bre_customer_company_info')
+        )
+    </insert>
+
+    <update id="updateBreCustomerCompanyInfo" parameterType="com.example.entity.BreCustomerCompanyInfoDto">
+        update bre_customer_company_info set
+        <if test="chineseName!=null and chineseName!=''">
+            chinese_name=#{chineseName} ,
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation!=''">
+            chinese_abbreviation=#{chineseAbbreviation} ,
+        </if>
+        <if test="englishName!=null and englishName!=''">
+            english_name=#{englishName} ,
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation!=''">
+            english_abbreviation=#{englishAbbreviation} ,
+        </if>
+        <if test="countriesAndRegions!=null and countriesAndRegions!=''">
+            countries_and_regions=#{countriesAndRegions} ,
+        </if>
+        <if test="domesticAndForeign!=null and domesticAndForeign!=''">
+            domestic_and_foreign=#{domesticAndForeign} ,
+        </if>
+        <if test="organizationType!=null and organizationType!=''">
+            organization_type=#{organizationType} ,
+        </if>
+        <if test="contractBillingRequirements!=null and contractBillingRequirements!=''">
+            contract_billing_requirements=#{contractBillingRequirements} ,
+        </if>
+        <if test="billingPrinciple!=null and billingPrinciple!=''">
+            billing_principle=#{billingPrinciple} ,
+        </if>
+        <if test="faultToleranceOfBilling!=null and faultToleranceOfBilling!=''">
+            fault_tolerance_of_billing=#{faultToleranceOfBilling} ,
+        </if>
+        <if test="settlementPrinciple!=null and settlementPrinciple!=''">
+            settlement_principle=#{settlementPrinciple} ,
+        </if>
+        <if test="emailSuffix!=null and emailSuffix!=''">
+            email_suffix=#{emailSuffix},
+        </if>
+        <if test="address!=null and address!=''">
+            address=#{address},
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency!=''">
+            settlement_currency=#{settlementCurrency},
+        </if>
+        number_id=number_id
+        where
+
+             id=#{id}
+
+
+    </update>
+
+</mapper>

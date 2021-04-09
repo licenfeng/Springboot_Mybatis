@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreTreatyNonPropArrangeInfoMapper">
+    <update id="updateBreTreatyNonPropArrangeInfoInfo"
+            parameterType="com.example.entity.BreTreatyNonPropArrangeInfoDto">
+        update bre_treaty_non_prop_arrange_info set id=id
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber !=''">
+            , non_prop_limit_number=#{nonPropLimitNumber}
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage !=''">
+            , non_prop_limit_percentage=#{nonPropLimitPercentage}
+        </if>
+        <if test="nonPropLimit!=null and nonPropLimit !=''">
+            , non_prop_limit=#{nonPropLimit}
+        </if>
+        <if test="arrangeLimitNumber!=null and arrangeLimitNumber !=''">
+            , arrange_limit_number=#{arrangeLimitNumber}
+        </if>
+        <if test="arrangeLimitPercentage!=null and arrangeLimitPercentage !=''">
+            , arrange_limit_percentage=#{arrangeLimitPercentage}
+        </if>
+        <if test="arrangeLimit!=null and arrangeLimit !=''">
+            , arrange_limit=#{arrangeLimit}
+        </if>
+        where 1=1
+        <if test="id!=null and id!=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerId}
+        </if>
+
+
+    </update>
+    <insert id="addBreTreatyNonPropArrangeInfoInfo" parameterType="com.example.entity.BreTreatyNonPropArrangeInfoDto">
+        insert into bre_treaty_non_prop_arrange_info(
+        id
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , bre_slip_number
+        </if>
+        <if test="propId!=null and propId != ''">
+            , prop_id
+        </if>
+        <if test="reinsurerId!=null and reinsurerId != ''">
+            , reinsurer_id
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber != ''">
+            , non_prop_limit_number
+            , arrange_limit_number
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage != ''">
+            , non_prop_limit_percentage
+            , arrange_limit_percentage
+        </if>
+        <if test="nonPropLimit!=null and nonPropLimit != ''">
+            , non_prop_limit
+            , arrange_limit
+        </if>
+        ) values (
+        currval('bre_treaty_non_prop_arrange_info')
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , #{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId != ''">
+            , #{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId != ''">
+            , #{reinsurerId}
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber != ''">
+            , #{nonPropLimitNumber}
+            , #{arrangeLimitNumber}
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage != ''">
+            , #{nonPropLimitPercentage}
+            , #{arrangeLimitPercentage}
+        </if>
+        <if test="nonPropLimit!=null and nonPropLimit != ''">
+            , #{nonPropLimit}
+            , #{arrangeLimit}
+        </if>
+        )
+    </insert>
+
+    <!--<insert id="addBreTreatyNonPropArrangeInfoInfo" parameterType="com.example.entity.BreTreatAllInfoDto">-->
+        <!--insert into bre_treaty_non_prop_arrange_info(-->
+        <!--id-->
+        <!--<if test="breSlipNumber!=null and breSlipNumber != ''">-->
+            <!--, bre_slip_number-->
+        <!--</if>-->
+        <!--<if test="propId!=null and propId != ''">-->
+            <!--, prop_id-->
+        <!--</if>-->
+        <!--<if test="reinsurerId!=null and reinsurerId != ''">-->
+            <!--, reinsurer_id-->
+        <!--</if>-->
+        <!--<if test="nonPropLimitNumber!=null and nonPropLimitNumber != ''">-->
+            <!--, non_prop_limit_number-->
+            <!--, arrange_limit_number-->
+        <!--</if>-->
+        <!--<if test="nonPropLimitPercentage!=null and nonPropLimitPercentage != ''">-->
+            <!--, non_prop_limit_percentage-->
+            <!--, arrange_limit_percentage-->
+        <!--</if>-->
+        <!--<if test="nonPropLimit!=null and nonPropLimit != ''">-->
+            <!--, non_prop_limit-->
+            <!--, arrange_limit-->
+        <!--</if>-->
+        <!--) values (-->
+        <!--currval('bre_treaty_non_prop_arrange_info')-->
+        <!--<if test="breSlipNumber!=null and breSlipNumber != ''">-->
+            <!--, #{breSlipNumber}-->
+        <!--</if>-->
+        <!--<if test="propId!=null and propId != ''">-->
+            <!--, #{propId}-->
+        <!--</if>-->
+        <!--<if test="reinsurerId!=null and reinsurerId != ''">-->
+            <!--, #{reinsurerId}-->
+        <!--</if>-->
+        <!--<if test="nonPropLimitNumber!=null and nonPropLimitNumber != ''">-->
+            <!--, #{nonPropLimitNumber}-->
+            <!--, #{arrangeLimitNumber}-->
+        <!--</if>-->
+        <!--<if test="nonPropLimitPercentage!=null and nonPropLimitPercentage != ''">-->
+            <!--, #{nonPropLimitPercentage}-->
+            <!--, #{arrangeLimitPercentage}-->
+        <!--</if>-->
+        <!--<if test="nonPropLimit!=null and nonPropLimit != ''">-->
+            <!--, #{nonPropLimit}-->
+            <!--, #{arrangeLimit}-->
+        <!--</if>-->
+        <!--)-->
+    <!--</insert>-->
+
+    <select id="getBreTreatyNonPropArrangeInfoList" parameterType="com.example.entity.BreTreatyNonPropArrangeInfoDto"
+            resultType="com.example.entity.BreTreatyNonPropArrangeInfoDto">
+        select
+        id as "id",
+        bre_slip_number as "breSlipNumber",
+        prop_id as "propId",
+        reinsurer_id as "reinsurerId",
+        non_prop_limit_number as "nonPropLimitNumber",
+        non_prop_limit_percentage as "nonPropLimitPercentage",
+        non_prop_limit as "nonPropLimit",
+        arrange_limit_number as "arrangeLimitNumber",
+        arrange_limit_percentage as "arrangeLimitPercentage",
+        arrange_limit as "arrangeLimit",
+        arrange_layer as "arrangeLayer"
+        from bre_treaty_non_prop_arrange_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerId}
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber !=''">
+            and non_prop_limit_number=#{nonPropLimitNumber}
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage !=''">
+            and non_prop_limit_percentage=#{nonPropLimitPercentage}
+        </if>
+        <if test="nonPropLimit!=null and nonPropLimit !=''">
+            and non_prop_limit=#{nonPropLimit}
+        </if>
+        <if test="arrangeLimitNumber!=null and arrangeLimitNumber !=''">
+            and arrange_limit_number=#{arrangeLimitNumber}
+        </if>
+        <if test="arrangeLimitPercentage!=null and arrangeLimitPercentage !=''">
+            and arrange_limit_percentage=#{arrangeLimitPercentage}
+        </if>
+        <if test="arrangeLimit!=null and arrangeLimit !=''">
+            and arrange_limit=#{arrangeLimit}
+        </if>
+
+    </select>
+
+    <insert id="addBreTreatyNonPropArrangeInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
+        insert into bre_treaty_non_prop_arrange_info(
+        id
+        , bre_slip_number
+        , prop_id
+        , reinsurer_id
+        , non_prop_limit_number
+        , arrange_limit_number
+        , non_prop_limit_percentage
+        , arrange_limit_percentage
+        , non_prop_limit
+        , arrange_limit
+        , arrange_layer
+        ) select
+        currval('bre_treaty_non_prop_arrange_info')
+        , #{breSlipNumber}
+        , id
+        , #{reinsurerId}
+        ,non_prop_limit_number
+        ,non_prop_limit_number
+        ,non_prop_limit_percentage
+        ,non_prop_limit_percentage
+        ,non_prop_limit
+        ,non_prop_limit
+        ,layer
+        from bre_treaty_non_prop_info where 1=1
+        <if test="breSlipNumber!=null and breSlipNumber != '' ">
+            and bre_Slip_Number= #{breSlipNumber}
+        </if>
+        <if test="nonPropId!=null and nonPropId !='' ">
+            and id= #{nonPropId}
+        </if>
+    </insert>
+
+    <delete id="delBreTreatyNonPropArrangeInfoInfo" parameterType="com.example.entity.BreTreatyNonPropArrangeInfoDto">
+        delete from bre_treaty_non_prop_arrange_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerId}
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber !=''">
+            and non_prop_limit_number=#{nonPropLimitNumber}
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage !=''">
+            and non_prop_limit_percentage=#{nonPropLimitPercentage}
+        </if>
+        <if test="nonPropLimit!=null and nonPropLimit !=''">
+            and non_prop_limit=#{nonPropLimit}
+        </if>
+        <if test="arrangeLimitNumber!=null and arrangeLimitNumber !=''">
+            and arrange_limit_number=#{arrangeLimitNumber}
+        </if>
+        <if test="arrangeLimitPercentage!=null and arrangeLimitPercentage !=''">
+            and arrange_limit_percentage=#{arrangeLimitPercentage}
+        </if>
+        <if test="arrangeLimit!=null and arrangeLimit !=''">
+            and arrange_limit=#{arrangeLimit}
+        </if>
+
+    </delete>
+</mapper>

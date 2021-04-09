@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+
+
+    <select id="getUserInfo" resultType="com.example.entity.UserInfoDto" parameterType="java.lang.String">
+		   select username as "username",
+				password as "password",
+				chinese_name as "chineseName",
+				english_name as "englishName",
+				department as "department",
+				position as "position"
+			 from  bres_user_info where
+				  username=#{username}
+	  </select>
+
+
+
+</mapper>

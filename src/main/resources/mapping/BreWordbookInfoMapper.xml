@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreWordbookInfoMapper">
+
+    <select id="getBreWordbookInfo" parameterType="com.example.entity.BreWordbookInfoDto" resultType="com.example.entity.BreWordbookInfoDto">
+        select
+            type as "type",
+            type_desc as "typeDesc",
+            key_type as "keyType",
+            value_type as "valueType",
+            key_desc as "keyDesc",
+            key_off as "keyOff",
+            id as "id"
+        from  bre_wordbook_info where 1=1
+        <if test="type!=null and type!=''">
+            and  type=#{type}
+        </if>
+
+        <if test="typeDesc!=null and typeDesc!=''">
+            and  type_desc=#{typeDesc}
+        </if>
+
+        <if test="keyType!=null and keyType!=''">
+            and  key_type=#{keyType}
+        </if>
+
+        <if test="valueType!=null and valueType!=''">
+            and  value_type=#{valueType}
+        </if>
+
+        <if test="keyDesc!=null and keyDesc!=''">
+            and  key_desc=#{keyDesc}
+        </if>
+
+        <if test="keyOff!=null and keyOff!=''">
+            and  key_off=#{keyOff}
+        </if>
+
+        <if test="id!=null and id!=''">
+            and  id=#{id}
+        </if>
+        limit #{startValue},#{pageSize}
+
+
+    </select>
+
+
+
+
+
+    <select id="getBreWordbookInfoGroupByType" parameterType="com.example.entity.BreWordbookInfoDto" resultType="com.example.entity.BreWordbookInfoDto">
+        <![CDATA[  select
+            type as "type",
+            type_desc as "typeDesc"
+        from  bre_wordbook_info group by type,typeDesc  ]]>
+    </select>
+
+    <select id="getBreWordbookInfoGroupByKeyType" parameterType="com.example.entity.BreWordbookInfoDto" resultType="com.example.entity.BreWordbookInfoDto">
+        <![CDATA[
+         select
+            key_type as "keyType",
+            value_type as "valueType"
+        from  bre_wordbook_info
+           where 1=1
+         ]]>
+        <if test="type!=null and type!=''">
+          and  type = #{type}
+        </if>
+        group by key_type,key_desc
+    </select>
+
+    <delete id="deleteBreWordbookInfo" parameterType="com.example.entity.BreWordbookInfoDto">
+         delete from bre_wordbook_info where   id=#{id}
+    </delete>
+
+    <update id="updateBreWordbookInfo" parameterType="com.example.entity.BreWordbookInfoDto">
+        update  bre_wordbook_info set
+        <if test="type!=null">
+            type=#{type} ,
+        </if>
+        <if test="typeDesc!=null">
+            type_desc=#{typeDesc} ,
+        </if>
+        <if test="keyType!=null">
+            key_type=#{keyType} ,
+        </if>
+        <if test="valueType!=null">
+            value_type=#{valueType} ,
+        </if>
+        <if test="keyDesc!=null">
+            key_desc=#{keyDesc} ,
+        </if>
+        <if test="keyOff!=null">
+            key_off=#{keyOff}
+        </if>
+        where 1=1
+        <if test="type!=null">
+           and  type=#{type}
+         </if>
+        <if test="typeDesc!=null">
+            and  type_desc=#{typeDesc}
+        </if>
+        <if test="keyType!=null">
+            and  key_type=#{keyType}
+        </if>
+        <if test="valueType!=null">
+            and  value_type=#{valueType}
+        </if>
+        <if test="keyDesc!=null">
+            and  key_desc=#{keyDesc}
+        </if>
+        <if test="id!=null">
+            and  id=#{id}
+        </if>
+    </update>
+
+    <insert id="addBreWordbookInfo" parameterType="com.example.entity.BreWordbookInfoDto">
+        insert into bre_wordbook_info(
+        <if test="type!=null">
+            type,
+        </if>
+        <if test="typeDesc!=null">
+            type_desc,
+        </if>
+        <if test="keyType!=null">
+            key_type,
+        </if>
+        <if test="valueType!=null">
+            value_type,
+        </if>
+        <if test="keyDesc!=null">
+            key_desc,
+        </if>
+        <if test="keyOff!=null">
+            key_off,
+        </if>
+
+            id
+
+        )values( <if test="type!=null">
+        #{type},
+    </if>
+        <if test="typeDesc!=null">
+            #{typeDesc},
+        </if>
+        <if test="keyType!=null">
+            #{keyType},
+        </if>
+        <if test="valueType!=null">
+            #{valueType},
+        </if>
+        <if test="keyDesc!=null">
+            #{keyDesc},
+        </if>
+        <if test="keyOff!=null">
+            #{keyOff},
+        </if>
+        currval('bre_wordbook_info')
+        )
+    </insert>
+
+    <select id="getBreSlipNumber" resultType="java.lang.String">
+
+        select breSlipNumberValue('breSlipNumber')
+    </select>
+
+    <select id="getReinsurerId" resultType="java.lang.String">
+
+        select  currval('bre_treaty_reinsurer_info')
+    </select>
+
+</mapper>

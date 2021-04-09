@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreTreatyArrangeInfoMapper">
+    <update id="updateBreTreatyArrangeInfoInfo" parameterType="com.example.entity.BreTreatyArrangeInfoDto">
+        update bre_treaty_arrange_info set id=id
+        <if test="lineOfBusiness!=null and lineOfBusiness !=''">
+            , line_of_business=#{lineOfBusiness}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            , arrange_commission_for_quota_share=#{arrangeCommissionForQuotaShare}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            , arrange_commission_for_surplus=#{arrangeCommissionForSurplus}
+        </if>
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerId}
+        </if>
+
+    </update>
+    <select id="getBreTreatyArrangeInfoList" parameterType="com.example.entity.BreTreatyArrangeInfoDto"
+            resultType="com.example.entity.BreTreatyArrangeInfoDto">
+        select
+        id as "id",
+        bre_slip_number as "breSlipNumber",
+        prop_id as "propId",
+        reinsurer_id as "reinsurerId",
+        line_of_business as "lineOfBusiness",
+        arrange_section as "arrangeSection",
+        arrange_commission_for_quota_share as "arrangeCommissionForQuotaShare",
+        arrange_commission_for_surplus as "arrangeCommissionForSurplus"
+        from bre_treaty_arrange_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerId}
+        </if>
+        <if test="lineOfBusiness!=null and lineOfBusiness !=''">
+            and line_of_business=#{lineOfBusiness}
+        </if>
+        <if test="arrangeSection!=null and arrangeSection !=''">
+            and arrange_section=#{arrangeSection}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            and arrange_commission_for_quota_share=#{arrangeCommissionForQuotaShare}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            and arrange_commission_for_surplus=#{arrangeCommissionForSurplus}
+        </if>
+
+    </select>
+    <insert id="addBreTreatyArrangeInfoInfo" parameterType="com.example.entity.BreTreatyArrangeInfoDto">
+        insert into bre_treaty_arrange_info(
+        id
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , bre_slip_number
+        </if>
+        <if test="propId!=null and propId != ''">
+            , prop_id
+        </if>
+        <if test="reinsurerId!=null and reinsurerId != ''">
+            , reinsurer_id
+        </if>
+        <if test="lineOfBusiness!=null and lineOfBusiness != ''">
+            , line_of_business
+        </if>
+        <if test="arrangeSection!=null and arrangeSection != ''">
+            , arrange_section
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare != ''">
+            , arrange_commission_for_quota_share
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus != ''">
+            , arrange_commission_for_surplus
+        </if>
+        ) values ( currval('bre_treaty_arrange_info')
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , #{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId != ''">
+            , #{propId}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId != ''">
+            , #{reinsurerId}
+        </if>
+        <if test="lineOfBusiness!=null and lineOfBusiness != ''">
+            , #{lineOfBusiness}
+        </if>
+        <if test="arrangeSection!=null and arrangeSection != ''">
+            , #{arrangeSection}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare != ''">
+            , #{arrangeCommissionForQuotaShare}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus != ''">
+            , #{arrangeCommissionForSurplus}
+        </if>
+        )
+    </insert>
+    <delete id="delBreTreatyArrangeInfoInfo" parameterType="com.example.entity.BreTreatyArrangeInfoDto">
+        delete from bre_treaty_arrange_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breslipnumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propid}
+        </if>
+        <if test="reinsurerId!=null and reinsurerId !=''">
+            and reinsurer_id=#{reinsurerid}
+        </if>
+        <if test="lineOfBusiness!=null and lineOfBusiness !=''">
+            and line_of_business=#{lineofbusiness}
+        </if>
+        <if test="arrangeSection!=null and arrangeSection !=''">
+            and arrange_section=#{arrangesection}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            and arrange_commission_for_quota_share=#{arrangecommissionforquotashare}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            and arrange_commission_for_surplus=#{arrangecommissionforsurplus}
+        </if>
+
+    </delete>
+</mapper>

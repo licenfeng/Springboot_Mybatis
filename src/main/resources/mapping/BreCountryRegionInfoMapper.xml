@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreCountryRegionInfoMapper">
+    <update id="updateBreCountryRegionInfoInfo" parameterType="com.example.entity.BreCountryRegionInfoDto">
+        update bre_country_region_info set id=id
+        <if test="englishAbbreviation!=null and englishAbbreviation !=''">
+            , english_abbreviation=#{englishAbbreviation}
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation !=''">
+            , chinese_abbreviation=#{chineseAbbreviation}
+        </if>
+        <if test="englishName!=null and englishName !=''">
+            , english_name=#{englishName}
+        </if>
+        <if test="towCode!=null and towCode !=''">
+            , tow_code=#{towCode}
+        </if>
+        <if test="threeCode!=null and threeCode !=''">
+            , three_code=#{threeCode}
+        </if>
+        <if test="numberCode!=null and numberCode !=''">
+            , number_code=#{numberCode}
+        </if>
+        <if test="countryDesc!=null and countryDesc !=''">
+            , country_desc=#{countryDesc}
+        </if>
+
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </update>
+    <select id="getBreCountryRegionInfoList" parameterType="com.example.entity.BreCountryRegionInfoDto"
+            resultType="com.example.entity.BreCountryRegionInfoDto">
+        select
+        number as "number",
+        english_abbreviation as "englishAbbreviation",
+        chinese_abbreviation as "chineseAbbreviation",
+        english_name as "englishName",
+        tow_code as "towCode",
+        three_code as "threeCode",
+        number_code as "numberCode",
+        country_desc as "countryDesc",
+        id as "id"
+        from bre_country_region_info
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation !=''">
+            and english_abbreviation=#{englishAbbreviation}
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation !=''">
+            and chinese_abbreviation=#{chineseAbbreviation}
+        </if>
+        <if test="englishName!=null and englishName !=''">
+            and english_name=#{englishName}
+        </if>
+        <if test="towCode!=null and towCode !=''">
+            and tow_code=#{towCode}
+        </if>
+        <if test="threeCode!=null and threeCode !=''">
+            and three_code=#{threeCode}
+        </if>
+        <if test="numberCode!=null and numberCode !=''">
+            and number_code=#{numberCode}
+        </if>
+        <if test="countryDesc!=null and countryDesc !=''">
+            and country_desc=#{countryDesc}
+        </if>
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </select>
+    <insert id="addBreCountryRegionInfoInfo" parameterType="com.example.entity.BreCountryRegionInfoDto">
+        insert into bre_country_region_info(
+        <if test="number!=null and number != ''">
+            number
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation != ''">
+            , english_abbreviation
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation != ''">
+            , chinese_abbreviation
+        </if>
+        <if test="englishName!=null and englishName != ''">
+            , english_name
+        </if>
+        <if test="towCode!=null and towCode != ''">
+            , tow_code
+        </if>
+        <if test="threeCode!=null and threeCode != ''">
+            , three_code
+        </if>
+        <if test="numberCode!=null and numberCode != ''">
+            , number_code
+        </if>
+        <if test="countryDesc!=null and countryDesc != ''">
+            , country_desc
+        </if>
+        , id
+        ) values (
+        <if test="number!=null and number != ''">
+            #{number}
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation != ''">
+            , #{englishAbbreviation}
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation != ''">
+            , #{chineseAbbreviation}
+        </if>
+        <if test="englishName!=null and englishName != ''">
+            , #{englishName}
+        </if>
+        <if test="towCode!=null and towCode != ''">
+            , #{towCode}
+        </if>
+        <if test="threeCode!=null and threeCode != ''">
+            , #{threeCode}
+        </if>
+        <if test="numberCode!=null and numberCode != ''">
+            , #{numberCode}
+        </if>
+        <if test="countryDesc!=null and countryDesc != ''">
+            , #{countryDesc}
+        </if>
+        , currval('bre_country_region_info'))
+    </insert>
+    <delete id="delBreCountryRegionInfoInfo" parameterType="com.example.entity.BreCountryRegionInfoDto">
+        delete from bre_country_region_info
+        where 1=1
+        <if test="number!=null and number !=''">
+            and number=#{number}
+        </if>
+        <if test="englishAbbreviation!=null and englishAbbreviation !=''">
+            and english_abbreviation=#{englishAbbreviation}
+        </if>
+        <if test="chineseAbbreviation!=null and chineseAbbreviation !=''">
+            and chinese_abbreviation=#{chineseAbbreviation}
+        </if>
+        <if test="englishName!=null and englishName !=''">
+            and english_name=#{englishName}
+        </if>
+        <if test="towCode!=null and towCode !=''">
+            and tow_code=#{towCode}
+        </if>
+        <if test="threeCode!=null and threeCode !=''">
+            and three_code=#{threeCode}
+        </if>
+        <if test="numberCode!=null and numberCode !=''">
+            and number_code=#{numberCode}
+        </if>
+        <if test="countryDesc!=null and countryDesc !=''">
+            and country_desc=#{countryDesc}
+        </if>
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+
+    </delete>
+
+    <insert id="insertBreCurrencyRegionInfoInfoBatch" parameterType="java.util.List">
+        insert into bre_country_region_info(
+            number
+            , english_abbreviation
+            , chinese_abbreviation
+            , english_name
+            , tow_code
+            , three_code
+            , number_code
+            , country_desc
+           , id
+        ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.number}
+            ,#{item.englishAbbreviation}
+            ,#{item.chineseAbbreviation}
+            ,#{item.englishName}
+            ,#{item.towCode}
+            ,#{item.threeCode}
+            ,#{item.numberCode}
+            ,#{item.countryDesc}
+            , currval('bre_country_region_info')
+            )
+        </foreach>
+    </insert>
+
+</mapper>

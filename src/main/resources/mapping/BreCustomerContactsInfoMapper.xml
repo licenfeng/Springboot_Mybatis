@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreCustomerContactsInfoMapper">
+
+   <select id="getBreCustomerContactsInfo" parameterType="com.example.entity.BreCustomerContactsInfoDto" resultType="com.example.entity.BreCustomerContactsInfoDto">
+       select
+           id as "id",
+           contacts_name as "contactsName",
+           contact_information as "contactInformation",
+           mailbox as "mailbox",
+           duty as "duty",
+           entry_date as "entryDate",
+            enable  as "enable",
+           departure_date as "departureDate",
+           company_email as "companyEmail",
+           departure_flag as "departureFlag",
+           customer_id  as  customerId
+       from  bre_customer_contacts_info where 1=1
+       <if test="id!=null">
+           and  id=#{id}
+       </if>
+       <if test="customerId!=null and customerId !=''">
+           and  customer_id=#{customerId}
+       </if>
+       <if test="contactsName!=null">
+           and  contacts_name=#{contactsName}
+       </if>
+
+       <if test="contactInformation!=null">
+           and  contact_information=#{contactInformation}
+       </if>
+
+       <if test="mailbox!=null">
+           and  mailbox=#{mailbox}
+       </if>
+
+       <if test="duty!=null">
+           and  duty=#{duty}
+       </if>
+
+       <if test="entryDate!=null">
+           and  entry_date=#{entryDate}
+       </if>
+
+       <if test="departureDate!=null">
+           and  departure_date=#{departureDate}
+       </if>
+       <if test="departureDate!=null">
+           and  company_email=#{companyEmail}
+       </if>
+   </select>
+
+    <update id="updateBreCustomerContactsInfo" parameterType="com.example.entity.BreCustomerContactsInfoDto" >
+        update  bre_customer_contacts_info set id=id
+        <if test="customerId!=null and customerId !=''">
+            , customer_id=#{customerId}
+        </if>
+
+        <if test="enable!=null and enable !=''">
+            ,  enable=#{enable}
+        </if>
+
+        <if test="contactsName!=null">
+            , contacts_name=#{contactsName}
+        </if>
+        <if test="contactInformation!=null">
+            ,  contact_information=#{contactInformation}
+        </if>
+        <if test="mailbox!=null">
+            ,  mailbox=#{mailbox}
+        </if>
+        <if test="duty!=null">
+            ,  duty=#{duty}
+        </if>
+        <if test="entryDate!=null">
+            , entry_date=#{entryDate}
+        </if>
+        <if test="departureDate!=null">
+            , departure_date=#{departureDate}
+        </if>
+        <if test="departureFlag!=null">
+            , departure_flag=#{departureFlag}
+        </if>
+        <if test="companyEmail!=null">
+            , company_email=#{companyEmail}
+        </if>
+        where 1=1
+        <if test="id!=null">
+           and  id=#{id}
+        </if>
+    </update>
+
+    <insert id="addBreCustomerContactsInfo" parameterType="com.example.entity.BreCustomerContactsInfoDto" >
+        insert into bre_customer_contacts_info(
+        <if test="contactsName!=null">
+            contacts_name,
+        </if>
+        <if test="contactInformation!=null">
+            contact_information,
+        </if>
+        <if test="mailbox!=null">
+            mailbox,
+        </if>
+        <if test="duty!=null">
+            duty,
+        </if>
+        <if test="entryDate!=null">
+            entry_date,
+        </if>
+        <if test="departureDate!=null">
+            departure_date,
+        </if>
+        <if test="customerId!=null and customerId !=''">
+            customer_id,
+        </if>
+        <if test="enable!=null and enable !=''">
+            enable,
+        </if>
+        <if test="departureFlag!=null and departureFlag !=''">
+            departure_flag,
+        </if>
+        <if test="companyEmail!=null and companyEmail !=''">
+            company_email,
+        </if>
+        id
+        )values(
+        <if test="contactsName!=null">
+            #{contactsName},
+        </if>
+        <if test="contactInformation!=null">
+            #{contactInformation},
+        </if>
+        <if test="mailbox!=null">
+            #{mailbox},
+        </if>
+        <if test="duty!=null">
+            #{duty},
+        </if>
+        <if test="entryDate!=null">
+        str_to_date(#{entryDate},'%Y-%m-%d %H:%i:%s'),
+        </if>
+        <if test="departureDate!=null">
+         str_to_date(#{departureDate},'%Y-%m-%d %H:%i:%s'),
+
+        </if>
+        <if test="customerId!=null and customerId !=''">
+            #{customerId},
+        </if>
+        <if test="enable!=null and enable !=''">
+            #{enable} ,
+        </if>
+        <if test="departureFlag!=null and departureFlag !=''">
+            #{departureFlag} ,
+        </if>
+        <if test="companyEmail!=null and companyEmail !=''">
+            #{companyEmail} ,
+        </if>
+        currval('bre_customer_contacts_info')
+        )
+    </insert>
+
+</mapper>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreTreatyReinsurerInfoMapper">
+    <update id="updateBreTreatyReinsurerInfoInfo" parameterType="com.example.entity.BreTreatyReinsurerInfoDto">
+        update bre_treaty_reinsurer_info set id=id
+
+        <if test="reinsurer!=null and reinsurer !=''">
+            , reinsurer=#{reinsurer}
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer !=''">
+            , country_of_reinsurer=#{countryOfReinsurer}
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency !=''">
+            , settlement_currency=#{settlementCurrency}
+        </if>
+        <if test="placementBroker!=null and placementBroker !=''">
+            , placement_broker=#{placementBroker}
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker !=''">
+            , country_of_placement_broker=#{countryOfPlacementBroker}
+        </if>
+        <if test="breBrokerage!=null and breBrokerage !=''">
+            , bre_brokerage=#{breBrokerage}
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent !=''">
+            , bre_brokerage_percent=#{breBrokeragePercent}
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge !=''">
+            , other_fee_or_charge=#{otherFeeOrCharge}
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat !=''">
+            , including_excluding_brokerage_vat=#{includingExcludingBrokerageVat}
+        </if>
+        <if test="writtenLine!=null and writtenLine !=''">
+            , written_line=#{writtenLine}
+        </if>
+        <if test="signedLine!=null and signedLine !=''">
+            , signed_line=#{signedLine}
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer !=''">
+            , status_reinsurer=#{statusReinsurer}
+        </if>
+        <if test="signingDate!=null and signingDate !=''">
+            , signing_date=str_to_date(#{signingDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer !=''">
+            , condition_reinsurer=#{conditionReinsurer}
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            , remarks=#{remarks}
+        </if>
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propId}
+        </if>
+    </update>
+    <select id="getBreTreatyReinsurerInfoList" parameterType="com.example.entity.BreTreatyReinsurerInfoDto"
+            resultType="com.example.entity.BreTreatyReinsurerInfoDto">
+        select
+        id as "id",
+        bre_slip_number as "breSlipNumber",
+        prop_id as "propId",
+        reinsurer as "reinsurer",
+        country_of_reinsurer as "countryOfReinsurer",
+        settlement_currency as "settlementCurrency",
+        placement_broker as "placementBroker",
+        country_of_placement_broker as "countryOfPlacementBroker",
+        bre_brokerage as "breBrokerage",
+        bre_brokerage_percent as "breBrokeragePercent",
+        other_fee_or_charge as "otherFeeOrCharge",
+        including_excluding_brokerage_vat as "includingExcludingBrokerageVat",
+        written_line as "writtenLine",
+        signed_line as "signedLine",
+        status_reinsurer as "statusReinsurer",
+        DATE_FORMAT(signing_date,'%Y-%m-%d %H:%i:%s') as "signingDate",
+        condition_reinsurer as "conditionReinsurer",
+        remarks as "remarks"
+        from bre_treaty_reinsurer_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propid}
+        </if>
+        <if test="reinsurer!=null and reinsurer !=''">
+            and reinsurer=#{reinsurer}
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer !=''">
+            and country_of_reinsurer=#{countryOfReinsurer}
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency !=''">
+            and settlement_currency=#{settlementCurrency}
+        </if>
+        <if test="placementBroker!=null and placementBroker !=''">
+            and placement_broker=#{placementBroker}
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker !=''">
+            and country_of_placement_broker=#{countryOfPlacementBroker}
+        </if>
+        <if test="breBrokerage!=null and breBrokerage !=''">
+            and bre_brokerage=#{breBrokerage}
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent !=''">
+            and bre_brokerage_percent=#{breBrokeragePercent}
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge !=''">
+            and other_fee_or_charge=#{otherFeeOrCharge}
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat !=''">
+            and including_excluding_brokerage_vat=#{includingExcludingBrokerageVat}
+        </if>
+        <if test="writtenLine!=null and writtenLine !=''">
+            and written_line=#{writtenLine}
+        </if>
+        <if test="signedLine!=null and signedLine !=''">
+            and signed_line=#{signedLine}
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer !=''">
+            and status_reinsurer=#{statusReinsurer}
+        </if>
+        <if test="signingDate!=null and signingDate !=''">
+            and signing_date=str_to_date(#{signingDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer !=''">
+            and condition_reinsurer=#{conditionReinsurer}
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            and remarks=#{remarks}
+        </if>
+
+    </select>
+    <insert id="addBreTreatyReinsurerInfoInfo" parameterType="com.example.entity.BreTreatyReinsurerInfoDto">
+        insert into bre_treaty_reinsurer_info(
+        id
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , bre_slip_number
+        </if>
+        <if test="propId!=null and propId != ''">
+            , prop_id
+        </if>
+        <if test="reinsurer!=null and reinsurer != ''">
+            , reinsurer
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer != ''">
+            , country_of_reinsurer
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency != ''">
+            , settlement_currency
+        </if>
+        <if test="placementBroker!=null and placementBroker != ''">
+            , placement_broker
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker != ''">
+            , country_of_placement_broker
+        </if>
+        <if test="breBrokerage!=null and breBrokerage != ''">
+            , bre_brokerage
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent != ''">
+            , bre_brokerage_percent
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge != ''">
+            , other_fee_or_charge
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat != ''">
+            , including_excluding_brokerage_vat
+        </if>
+        <if test="writtenLine!=null and writtenLine != ''">
+            , written_line
+        </if>
+        <if test="signedLine!=null and signedLine != ''">
+            , signed_line
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer != ''">
+            , status_reinsurer
+        </if>
+        <if test="signingDate!=null and signingDate != ''">
+            , signing_date
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer != ''">
+            , condition_reinsurer
+        </if>
+        <if test="remarks!=null and remarks != ''">
+            , remarks
+        </if>
+        ) values ( currval('bre_treaty_reinsurer_info')
+        <if test="breSlipNumber!=null and breSlipNumber != ''">
+            , #{breSlipNumber}
+        </if>
+        <if test="propId!=null and propId != ''">
+            , #{propId}
+        </if>
+        <if test="reinsurer!=null and reinsurer != ''">
+            , #{reinsurer}
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer != ''">
+            , #{countryOfReinsurer}
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency != ''">
+            , #{settlementCurrency}
+        </if>
+        <if test="placementBroker!=null and placementBroker != ''">
+            , #{placementBroker}
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker != ''">
+            , #{countryOfPlacementBroker}
+        </if>
+        <if test="breBrokerage!=null and breBrokerage != ''">
+            , #{breBrokerage}
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent != ''">
+            , #{breBrokeragePercent}
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge != ''">
+            , #{otherFeeOrCharge}
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat != ''">
+            , #{includingExcludingBrokerageVat}
+        </if>
+        <if test="writtenLine!=null and writtenLine != ''">
+            , #{writtenLine}
+        </if>
+        <if test="signedLine!=null and signedLine != ''">
+            , #{signedLine}
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer != ''">
+            , #{statusReinsurer}
+        </if>
+        <if test="signingDate!=null and signingDate != ''">
+            , str_to_date(#{signingDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer != ''">
+            , #{conditionReinsurer}
+        </if>
+        <if test="remarks!=null and remarks != ''">
+            , #{remarks}
+        </if>
+        )
+    </insert>
+    <delete id="delBreTreatyReinsurerInfoInfo" parameterType="com.example.entity.BreTreatyReinsurerInfoDto">
+        delete from bre_treaty_reinsurer_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="breSlipNumber!=null and breSlipNumber !=''">
+            and bre_slip_number=#{breslipnumber}
+        </if>
+        <if test="propId!=null and propId !=''">
+            and prop_id=#{propid}
+        </if>
+        <if test="reinsurer!=null and reinsurer !=''">
+            and reinsurer=#{reinsurer}
+        </if>
+        <if test="countryOfReinsurer!=null and countryOfReinsurer !=''">
+            and country_of_reinsurer=#{countryofreinsurer}
+        </if>
+        <if test="settlementCurrency!=null and settlementCurrency !=''">
+            and settlement_currency=#{settlementcurrency}
+        </if>
+        <if test="placementBroker!=null and placementBroker !=''">
+            and placement_broker=#{placementbroker}
+        </if>
+        <if test="countryOfPlacementBroker!=null and countryOfPlacementBroker !=''">
+            and country_of_placement_broker=#{countryofplacementbroker}
+        </if>
+        <if test="breBrokerage!=null and breBrokerage !=''">
+            and bre_brokerage=#{brebrokerage}
+        </if>
+        <if test="breBrokeragePercent!=null and breBrokeragePercent !=''">
+            and bre_brokerage_percent=#{brebrokeragepercent}
+        </if>
+        <if test="otherFeeOrCharge!=null and otherFeeOrCharge !=''">
+            and other_fee_or_charge=#{otherfeeorcharge}
+        </if>
+        <if test="includingExcludingBrokerageVat!=null and includingExcludingBrokerageVat !=''">
+            and including_excluding_brokerage_vat=#{includingexcludingbrokeragevat}
+        </if>
+        <if test="writtenLine!=null and writtenLine !=''">
+            and written_line=#{writtenline}
+        </if>
+        <if test="signedLine!=null and signedLine !=''">
+            and signed_line=#{signedline}
+        </if>
+        <if test="statusReinsurer!=null and statusReinsurer !=''">
+            and status_reinsurer=#{statusreinsurer}
+        </if>
+        <if test="signingDate!=null and signingDate !=''">
+            and signing_date=str_to_date(#{signingdate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="conditionReinsurer!=null and conditionReinsurer !=''">
+            and condition_reinsurer=#{conditionreinsurer}
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            and remarks=#{remarks}
+        </if>
+
+    </delete>
+</mapper>

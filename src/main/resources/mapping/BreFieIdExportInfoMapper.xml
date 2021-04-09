@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreFieIdExportInfoMapper">
+
+    <select id="getBreFieldExportInfoList" parameterType="com.example.entity.BreFieldExportInfoDto" resultType="com.example.entity.BreFieldExportInfoDto">
+        select
+        e.field_id as "fieldId",
+        e.field_position as "fieldPosition",
+        e.work_id as "workId",
+        e.field_desc as "fieldDesc",
+        e.work_desc as "workDesc",
+        e.export_off as "exportOff",
+        e.id as "id"
+        from   bre_field_export_info e left join bre_field_info f
+        on f.english_name =e.field_id
+        where 1=1
+        <if test="workId!=null">
+            and  e.work_id=#{workId}
+        </if>
+        order by field_position
+    </select>
+    <delete id="deleteBreFieldExportInfo" parameterType="com.example.entity.BreFieldExportInfoDto">
+         delete  from  bre_field_export_info where 1=1
+
+        <if test="fieldId!=null and fieldId !='' ">
+            and field_id=#{fieldId}
+        </if>
+
+        <if test="id!=null and id !='' ">
+            and id=#{id}
+        </if>
+
+
+    </delete>
+
+    <update id="updateBreFieldExportInfo" parameterType="com.example.entity.BreFieldExportInfoDto">
+        update  bre_field_export_info set field_id=field_id
+        <if test="fieldId!=null and fieldId !=''">
+           , field_id=#{fieldId}
+        </if>
+        <if test="fieldPosition!=null and fieldPosition !=''">
+           , field_position=#{fieldPosition}
+        </if>
+        <if test="workId!=null and workId !=''">
+          ,  work_id=#{workId}
+        </if>
+        <if test="fieldDesc!=null and fieldDesc !=''">
+          ,  field_desc=#{fieldDesc}
+        </if>
+        <if test="exportOff!=null and exportOff !=''">
+            , export_off=#{exportOff}
+        </if>
+        where 1=1
+        <if test="fieldId!=null and fieldId !=''">
+            and  field_id=#{fieldId}
+        </if>
+        <if test="workId!=null and workId !=''">
+            and  work_id=#{workId}
+        </if>
+
+        <if test="id!=null and id !=''">
+            and  id=#{id}
+        </if>
+    </update>
+
+    <insert id="addBreFieldExportInfo" parameterType="com.example.entity.BreFieldExportInfoDto">
+        insert into bre_field_export_info(
+        <if test="fieldId!=null">
+            field_id,
+        </if>
+        <if test="workId!=null">
+            work_id,
+        </if>
+        <if test="fieldDesc!=null">
+            field_desc,
+        </if>
+        <if test="exportOff!=null">
+            export_off,
+        </if>
+        field_position,
+        id
+        )values(
+        <if test="fieldId!=null">
+        #{fieldId},
+    </if>
+        <if test="workId!=null">
+            #{workId},
+        </if>
+        <if test="fieldDesc!=null">
+            #{fieldDesc},
+        </if>
+        <if test="exportOff!=null">
+            #{exportOff},
+        </if>
+        currval('fieldPosition'),
+        currval('bre_field_export_info')
+        )
+    </insert>
+
+    <select id="getFiledWorkIdList" resultType="com.example.entity.BreFieldExportInfoDto">
+            select
+               work_id as "workId",work_desc as "workDesc"
+            from bre_field_export_info
+            group by work_id,work_desc
+    </select>
+
+</mapper>

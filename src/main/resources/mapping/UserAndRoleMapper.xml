@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserAndRoleMapper">
+
+
+    <select id="getOpenIdByLink"   resultType="java.lang.String" parameterType="com.example.entity.UserAndRoleAndOperationDto">
+	  	<![CDATA[
+		   	select oper_id
+			from bres_operation_info
+			where oper_link like concat('%',concat(#{operLink},'%'))
+			limit 0,1
+		]]>
+	  </select>
+
+
+    <select id="countOpenByLinkAndUser"   resultType="java.lang.String" parameterType="com.example.entity.UserAndRoleAndOperationDto">
+	  	<![CDATA[
+		   	select count(*)
+			from common_role_oper_map a,common_user_role_map b
+			where a.role_id=b.role_id
+			and a.oper_id =#operId#
+			and b.username=#userName#
+		]]>
+	  </select>
+
+</mapper>
