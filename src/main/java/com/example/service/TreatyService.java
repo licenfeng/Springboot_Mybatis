@@ -138,7 +138,8 @@ public class TreatyService {
             //排分信息
             List list1 = breTreatyReinsurerInfoDto3.getList();
             BreTreatyNonPropArrangeInfoDto breTreatyNonPropArrangeInfoDto = (BreTreatyNonPropArrangeInfoDto) list1.get(0);
-            breTreatyNonPropArrangeInfoMapper.addBreTreatyNonPropArrangeInfoInfo(breTreatyNonPropArrangeInfoDto );  //自己添加一个插入方法
+            breTreatyNonPropArrangeInfoDto.setBreSlipNumber(breSlipNumberNew);
+            breTreatyNonPropArrangeInfoMapper.addBreTreatyNonPropArrangeInfoInfo(breTreatyNonPropArrangeInfoDto);  //自己添加一个插入方法
             //通过新的BreSlipNumber重新获取返回
             map = (HashMap) getBreTreatyBasisNonPropAllList(breTreatAllInfoDtoNew1);
         }
@@ -198,6 +199,7 @@ public class TreatyService {
             //排分信息
             List list1 = breTreatyReinsurerInfoDto3.getList();
             BreTreatyArrangeInfoDto breTreatyArrangeInfoDto = (BreTreatyArrangeInfoDto) list1.get(0);
+            breTreatyArrangeInfoDto.setBreSlipNumber(breSlipNumberNew);
             breTreatyArrangeInfoMapper.addBreTreatyArrangeInfoInfo(breTreatyArrangeInfoDto);
             //通过新的BreSlipNumber重新获取返回
             map = (HashMap) getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
