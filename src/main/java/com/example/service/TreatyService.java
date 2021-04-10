@@ -86,7 +86,7 @@ public class TreatyService {
     }
 
     /**========================================================================================================
-     * renew Non一个新的 通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
+     * renew 一个新的非比例Non   通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
      * @param
      * @return
      */
@@ -147,7 +147,7 @@ public class TreatyService {
     }
 
     /**
-     * renew 一个新的 通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
+     * renew 一个新的比例  通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
      * @param breTreatAllInfoDto
      * @return
      */
