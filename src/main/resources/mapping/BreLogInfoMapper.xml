@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BreLogInfoMapper">
+    <update id="updateBreLogInfoInfo" parameterType="com.example.entity.BreLogInfoDto">
+        update bre_log_info set id=id
+        <if test="id!=null and id !=''">
+            , id=#{id}
+        </if>
+        <if test="keyValue!=null and keyValue !=''">
+            , key_value=#{keyValue}
+        </if>
+        <if test="flagType!=null and flagType !=''">
+            , flag_type=#{flagType}
+        </if>
+        <if test="createdBy!=null and createdBy !=''">
+            , created_by=#{createdBy}
+        </if>
+        <if test="createdDate!=null and createdDate !=''">
+            , created_date=str_to_date(#{createdDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            , remarks=#{remarks}
+        </if>
+
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="keyValue!=null and keyValue !=''">
+            and key_value=#{keyValue}
+        </if>
+        <if test="flagType!=null and flagType !=''">
+            and flag_type=#{flagType}
+        </if>
+        <if test="createdBy!=null and createdBy !=''">
+            and created_by=#{createdBy}
+        </if>
+        <if test="createdDate!=null and createdDate !=''">
+            and created_date=str_to_date(#{createdDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            and remarks=#{remarks}
+        </if>
+
+    </update>
+    <select id="getBreLogInfoList" parameterType="com.example.entity.BreLogInfoDto"
+            resultType="com.example.entity.BreLogInfoDto">
+        select
+        id as "id",
+        key_value as "keyValue",
+        flag_type as "flagType",
+        created_by as "createdBy",
+        created_date as "createdDate",
+        remarks as "remarks"
+        from bre_log_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="keyValue!=null and keyValue !=''">
+            and key_value=#{keyValue}
+        </if>
+        <if test="flagType!=null and flagType !=''">
+            and flag_type=#{flagType}
+        </if>
+        <if test="createdBy!=null and createdBy !=''">
+            and created_by=#{createdBy}
+        </if>
+        <if test="createdDate!=null and createdDate !=''">
+            and created_date=str_to_date(#{createdDate},'%Y-%m-%d %H:%i:%s')
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            and remarks=#{remarks}
+        </if>
+
+    </select>
+    <insert id="addBreLogInfoInfo" parameterType="com.example.entity.BreLogInfoDto">
+        insert into bre_log_info(
+        id
+        <if test="keyValue!=null and keyValue != ''">
+            , key_value
+        </if>
+        <if test="flagType!=null and flagType != ''">
+            , flag_type
+        </if>
+        <if test="createdBy!=null and createdBy != ''">
+            , created_by
+        </if>
+
+        <if test="remarks!=null and remarks != ''">
+            , remarks
+        </if>
+        , created_date
+        ) values ( currval('bre_log_info')
+        <if test="keyValue!=null and keyValue != ''">
+            , #{keyValue}
+        </if>
+        <if test="flagType!=null and flagType != ''">
+            , #{flagType}
+        </if>
+        <if test="createdBy!=null and createdBy != ''">
+            , #{createdBy}
+        </if>
+        <if test="remarks!=null and remarks != ''">
+            , #{remarks}
+        </if>
+        , DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%s')
+        )
+    </insert>
+    <delete id="delBreLogInfoInfo" parameterType="com.example.entity.BreLogInfoDto">
+        delete from bre_log_info
+        where 1=1
+        <if test="id!=null and id !=''">
+            and id=#{id}
+        </if>
+        <if test="keyValue!=null and keyValue !=''">
+            and key_value=#{keyValue}
+        </if>
+        <if test="flagType!=null and flagType !=''">
+            and flag_type=#{flagType}
+        </if>
+        <if test="createdBy!=null and createdBy !=''">
+            and created_by=#{createdBy}
+        </if>
+        <if test="createdDate!=null and createdDate !=''">
+            and created_date=#{createdDate}
+        </if>
+        <if test="remarks!=null and remarks !=''">
+            and remarks=#{remarks}
+        </if>
+
+    </delete>
+</mapper>

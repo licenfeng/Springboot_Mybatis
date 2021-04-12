@@ -71,7 +71,6 @@
         bre_approval as "breApproval",
         bre_quo_sum as "breQuoSum",
         bre_spl_sum as "breSplSum",
-        value_type as "valueType",
         remarks1 as "remarks1",
         remarks2 as "remarks2",
         remarks3 as "remarks3"
@@ -176,9 +175,6 @@
         <if test="breSplSum!=null and breSplSum != ''">
             and bre_spl_sum=#{breSplSum}
         </if>
-        <if test="valueType!=null and valueType != ''">
-            and value_type=#{valueType}
-        </if>
 
     </select>
 
@@ -216,7 +212,6 @@
         basis.bre_approval as "breApproval",
         basis.bre_quo_sum as "breQuoSum",
         basis.bre_spl_sum as "breSplSum",
-        basis value_type as "valueType",
         basis.remarks1 as "remarks1",
         basis.remarks2 as "remarks2",
         basis.remarks3 as "remarks3",
@@ -364,9 +359,6 @@
         <if test="breSplSum!=null and breSplSum != ''">
             and basis.bre_spl_sum=#{breSplSum}
         </if>
-        <if test="valueType!=null and valueType != ''">
-            and basis.value_type=#{valueType}
-        </if>
         <if test="remarks1!=null">
             and basis.remarks1=#{remarks1}
         </if>
@@ -412,7 +404,6 @@
         basis.bre_approval as "breApproval",
         basis.bre_quo_sum as "breQuoSum",
         basis.bre_spl_sum as "breSplSum",
-        basis value_type as "valueType",
         basis.remarks1 as "remarks1",
         basis.remarks2 as "remarks2",
         basis.remarks3 as "remarks3",
@@ -558,9 +549,6 @@
         <if test="breSplSum!=null and breSplSum != ''">
             and basis.bre_spl_sum=#{breSplSum}
         </if>
-        <if test="valueType!=null and valueType != ''">
-            and basis.value_type=#{valueType}
-        </if>
         <if test="remarks1!=null">
             and basis.remarks1=#{remarks1}
         </if>
@@ -667,9 +655,6 @@
         <if test="breSplSum!=null">
             bre_spl_sum,
         </if>
-        <if test="valueType!=null">
-            value_type,
-        </if>
         <if test="remarks1!=null">
             remarks1,
         </if>
@@ -772,9 +757,6 @@
         </if>
         <if test="breSplSum!=null">
             #{breSplSum},
-        </if>
-        <if test="valueType!=null">
-            #{valueType},
         </if>
 
         <if test="remarks1!=null">
@@ -1186,6 +1168,7 @@
         fixed_or_provisional_commission as "fixedOrProvisionalCommission",
         epi_for_quota_share as "epiForQuotaShare",
         epi_for_surplus as "epiForSurplus",
+        line_of_business as lineOfBusiness,
         event_limit as "eventLimit",
         DATE_FORMAT(expiry_date_of_extension,'%Y-%m-%d %H:%i:%s') as "expiryDateOfExtension",
         underwriting_period as "underwritingPeriod"
@@ -1395,9 +1378,6 @@
         </if>
         <if test="breSplSum!=null and breSplSum != ''">
             , bre_spl_sum=#{breSplSum}
-        </if>
-        <if test="valueType!=null and valueType != ''">
-            ,value_type=#{valueType}
         </if>
 
         <if test="remarks1!=null and remarks1 !=''">
