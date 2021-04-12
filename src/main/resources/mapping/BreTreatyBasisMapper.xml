@@ -824,8 +824,8 @@
         )values(
 
         <if test="lineOfBusiness != null and lineOfBusiness !=''">
-            #{lineOfBusiness} ,
-        </if>
+        #{lineOfBusiness} ,
+    </if>
         <if test="breSlipNumber!=null and lineOfBusiness !=''">
             #{breSlipNumber},
         </if>
@@ -865,14 +865,9 @@
         <if test="underwritingPeriod!=null">
             #{underwritingPeriod},
         </if>
-
-        <if test="propId !=null and propId !=''">
-            #{propId}
-        </if>
-        <if test="propId ==null or propId ==''">
+        <if test="propId !=null or propId !=''">
             currval('bre_treaty_prop_info')
         </if>
-
         )
 
     </insert>

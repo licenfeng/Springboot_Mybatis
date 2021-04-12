@@ -195,11 +195,16 @@ public class TreatyService extends BreLogInfoService {
             breTreatyReinsurerInfoService.addBreTreatyReinsurerInfoInfo(breTreatyReinsurerInfoDto3);
             //排分信息
             List list1 = breTreatyReinsurerInfoDto3.getList();
-            BreTreatyArrangeInfoDto breTreatyArrangeInfoDto = (BreTreatyArrangeInfoDto) list1.get(0);
-            breTreatyArrangeInfoDto.setBreSlipNumber(breSlipNumberNew);
-            breTreatyArrangeInfoMapper.addBreTreatyArrangeInfoInfo(breTreatyArrangeInfoDto);
-            //通过新的BreSlipNumber重新获取返回
-            map = (HashMap) getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
+            if(list1.size()<=0){
+                return getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
+            }else{
+                BreTreatyArrangeInfoDto breTreatyArrangeInfoDto = (BreTreatyArrangeInfoDto) list1.get(0);
+                breTreatyArrangeInfoDto.setBreSlipNumber(breSlipNumberNew);
+                breTreatyArrangeInfoMapper.addBreTreatyArrangeInfoInfo(breTreatyArrangeInfoDto);
+                //通过新的BreSlipNumber重新获取返回
+                map = (HashMap) getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
+            }
+
         }
         return map;
     }
