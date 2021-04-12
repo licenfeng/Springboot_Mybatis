@@ -1,9 +1,6 @@
 package com.example.service;
 
-import com.example.entity.BreTreatAllInfoDto;
-import com.example.entity.BreTreatyArrangeInfoDto;
-import com.example.entity.BreTreatyNonPropArrangeInfoDto;
-import com.example.entity.BreTreatyReinsurerInfoDto;
+import com.example.entity.*;
 import com.example.mapper.BreTreatyArrangeInfoMapper;
 import com.example.mapper.BreTreatyBasisMapper;
 import com.example.mapper.BreTreatyNonPropArrangeInfoMapper;
@@ -13,10 +10,11 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
-public class TreatyService {
+public class TreatyService extends BreLogInfoService {
 
     @Autowired
     BreTreatyBasisMapper basisMapper;
@@ -37,7 +35,7 @@ public class TreatyService {
     @Autowired
     private BreTreatyArrangeInfoMapper breTreatyArrangeInfoMapper;
 
-    public List<BreTreatAllInfoDto> selectBreTreatyBasisAllName(){
+    public List<BreTreatAllInfoDto> selectBreTreatyBasisAllName() {
         return basisMapper.selectBreTreatyBasisAllName();
     }
 
@@ -54,51 +52,51 @@ public class TreatyService {
 //    }
 
     /**
-     *
      * @param breTreatAllInfoDto
      * @return
      */
-    public int addBreTreatyNonPropArrangeInfo(BreTreatAllInfoDto breTreatAllInfoDto){
+    public int addBreTreatyNonPropArrangeInfo(BreTreatAllInfoDto breTreatAllInfoDto) {
         int size = breTreatyNonPropArrangeInfoMapper.addBreTreatyNonPropArrangeInfo(breTreatAllInfoDto);
         return size;
     }
 
     /**
-     *
      * @param breTreatAllInfoDto
      * @return
      */
-    public  Map getBreTreatyBasisNonPropAllList(BreTreatAllInfoDto breTreatAllInfoDto){
-        Map map=new HashMap();
-        String  breSlipNumber =breTreatAllInfoDto.getBreSlipNumber();
+    public Map getBreTreatyBasisNonPropAllList(BreTreatAllInfoDto breTreatAllInfoDto) {
+        Map map = new HashMap();
+        String breSlipNumber = breTreatAllInfoDto.getBreSlipNumber();
         //合约基本信息
-        List<BreTreatAllInfoDto> list= getBreTreatyBasisInfoList(breTreatAllInfoDto);
-        map.put("basisList",list);
+        List<BreTreatAllInfoDto> list = getBreTreatyBasisInfoList(breTreatAllInfoDto);
+        map.put("basisList", list);
         //合约信息
-        List<BreTreatAllInfoDto> propList=getBreTreatyNonPropInfoList(breTreatAllInfoDto);
-        map.put("nonPropList",propList);
+        List<BreTreatAllInfoDto> propList = getBreTreatyNonPropInfoList(breTreatAllInfoDto);
+        map.put("nonPropList", propList);
         //再保人信息
-        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto=new BreTreatyReinsurerInfoDto();
+        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto = new BreTreatyReinsurerInfoDto();
         breTreatyReinsurerInfoDto.setBreSlipNumber(breSlipNumber);
-        List<BreTreatyReinsurerInfoDto> reinsureList= breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto,"Y");
-        map.put("reinsureList",reinsureList);
+        List<BreTreatyReinsurerInfoDto> reinsureList = breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto, "Y");
+        map.put("reinsureList", reinsureList);
         return map;
     }
 
-    /**========================================================================================================
+    /**
+     * ========================================================================================================
      * renew 一个新的非比例Non   通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
+     *
      * @param
      * @return
      */
-    public  Map copyNewGetBreTreatyBasisNonPropAllListByBreSlipNumber(BreTreatAllInfoDto breTreatAllInfoDto){
+    public Map copyNewGetBreTreatyBasisNonPropAllListByBreSlipNumber(BreTreatAllInfoDto breTreatAllInfoDto) {
         //重新得到breSlipNumber
         String breSlipNumberNew = treatyCommonService.getBreSlipNumber();
-        String  breSlipNumber =breTreatAllInfoDto.getBreSlipNumber();  //再保人查询时候需要用到
+        String breSlipNumber = breTreatAllInfoDto.getBreSlipNumber();  //再保人查询时候需要用到
         HashMap map = new HashMap();
         //合约基本信息
-        List<BreTreatAllInfoDto> list= getBreTreatyBasisInfoList(breTreatAllInfoDto);
-        if(list.size()<=0){
-            return  map;
+        List<BreTreatAllInfoDto> list = getBreTreatyBasisInfoList(breTreatAllInfoDto);
+        if (list.size() <= 0) {
+            return map;
         }
         BreTreatAllInfoDto breTreatAllInfoDtoNew1 = list.get(0);
         breTreatAllInfoDtoNew1.setBreSlipNumber(breSlipNumberNew);
@@ -106,14 +104,13 @@ public class TreatyService {
         breTreatAllInfoDtoNew1.setWrittenLine("");
         breTreatAllInfoDtoNew1.setSignedLine("");
         breTreatAllInfoDtoNew1.setStatusReinsurer("");
-        breTreatAllInfoDtoNew1.setValueType("");
-        this.addBreTreatyBasisInfo(breTreatAllInfoDtoNew1);
+       this.addBreTreatyBasisInfo(breTreatAllInfoDtoNew1);
         //合约信息
-        List<BreTreatAllInfoDto> propList=getBreTreatyNonPropInfoList(breTreatAllInfoDto);
-        if(propList.size()<=0){
+        List<BreTreatAllInfoDto> propList = getBreTreatyNonPropInfoList(breTreatAllInfoDto);
+        if (propList.size() <= 0) {
             return getBreTreatyBasisNonPropAllList(breTreatAllInfoDtoNew1);
-        }else{
-            BreTreatAllInfoDto breTreatAllInfoDtoNew2= propList.get(0);
+        } else {
+            BreTreatAllInfoDto breTreatAllInfoDtoNew2 = propList.get(0);
             breTreatAllInfoDtoNew2.setBreSlipNumber(breSlipNumberNew);
             breTreatAllInfoDtoNew2.setBreBoundNo("");
             breTreatAllInfoDtoNew2.setWrittenLine("");
@@ -122,12 +119,12 @@ public class TreatyService {
             this.addBreTreatyNonPropInfo(breTreatAllInfoDtoNew2);
         }
         //再保人信息
-        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto=new BreTreatyReinsurerInfoDto();
+        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto = new BreTreatyReinsurerInfoDto();
         breTreatyReinsurerInfoDto.setBreSlipNumber(breSlipNumber);
-        List<BreTreatyReinsurerInfoDto> reinsureList= breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto,"Y");
-        if(reinsureList.size()<=0){
+        List<BreTreatyReinsurerInfoDto> reinsureList = breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto, "Y");
+        if (reinsureList.size() <= 0) {
             return getBreTreatyBasisNonPropAllList(breTreatAllInfoDtoNew1);
-        }else{
+        } else {
             BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto3 = reinsureList.get(0);
             breTreatyReinsurerInfoDto3.setBreSlipNumber(breSlipNumberNew);
             breTreatyReinsurerInfoDto3.setWrittenLine("");
@@ -143,23 +140,24 @@ public class TreatyService {
             //通过新的BreSlipNumber重新获取返回
             map = (HashMap) getBreTreatyBasisNonPropAllList(breTreatAllInfoDtoNew1);
         }
-        return  map;
+        return map;
     }
 
     /**
      * renew 一个新的比例  通过BreSlipNumber查到数据，然后生成一个新的BreSlipNumber把所查到的数据插入
+     *
      * @param breTreatAllInfoDto
      * @return
      */
-    public  Map copyNewGetBreTreatyBasisPropAllListByBreSlipNumber(BreTreatAllInfoDto breTreatAllInfoDto){
+    public Map copyNewGetBreTreatyBasisPropAllListByBreSlipNumber(BreTreatAllInfoDto breTreatAllInfoDto) {
         //重新得到breSlipNumber
         String breSlipNumberNew = treatyCommonService.getBreSlipNumber();
-        String  breSlipNumber =breTreatAllInfoDto.getBreSlipNumber();  //再保人查询时候需要用到
+        String breSlipNumber = breTreatAllInfoDto.getBreSlipNumber();  //再保人查询时候需要用到
         HashMap map = new HashMap();
         //合约基本信息
-        List<BreTreatAllInfoDto> list= getBreTreatyBasisInfoList(breTreatAllInfoDto);
-        if(list.size()<=0){
-            return  map;
+        List<BreTreatAllInfoDto> list = getBreTreatyBasisInfoList(breTreatAllInfoDto);
+        if (list.size() <= 0) {
+            return map;
         }
         BreTreatAllInfoDto breTreatAllInfoDtoNew1 = list.get(0);
         breTreatAllInfoDtoNew1.setBreSlipNumber(breSlipNumberNew);
@@ -167,14 +165,13 @@ public class TreatyService {
         breTreatAllInfoDtoNew1.setWrittenLine("");
         breTreatAllInfoDtoNew1.setSignedLine("");
         breTreatAllInfoDtoNew1.setStatusReinsurer("");
-        breTreatAllInfoDtoNew1.setValueType("");
-        this.addBreTreatyBasisInfo(breTreatAllInfoDtoNew1);
+      this.addBreTreatyBasisInfo(breTreatAllInfoDtoNew1);
         //合约信息
-        List<BreTreatAllInfoDto> propList=selectBreTreatyPropInfo(breTreatAllInfoDto);
-        if(propList.size()<=0){
+        List<BreTreatAllInfoDto> propList = selectBreTreatyPropInfo(breTreatAllInfoDto);
+        if (propList.size() <= 0) {
             return getBreTreatyBasisNonPropAllList(breTreatAllInfoDtoNew1);
-        }else{
-            BreTreatAllInfoDto breTreatAllInfoDtoNew2= propList.get(0);
+        } else {
+            BreTreatAllInfoDto breTreatAllInfoDtoNew2 = propList.get(0);
             breTreatAllInfoDtoNew2.setBreSlipNumber(breSlipNumberNew);
             breTreatAllInfoDtoNew2.setBreBoundNo("");
             breTreatAllInfoDtoNew2.setWrittenLine("");
@@ -183,13 +180,13 @@ public class TreatyService {
             this.addBreTreatyPropInfo(breTreatAllInfoDtoNew2);
         }
         //再保人信息
-        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto=new BreTreatyReinsurerInfoDto();
+        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto = new BreTreatyReinsurerInfoDto();
         breTreatyReinsurerInfoDto.setBreSlipNumber(breSlipNumber);
-        List<BreTreatyReinsurerInfoDto> reinsureList= breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto,"");
+        List<BreTreatyReinsurerInfoDto> reinsureList = breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto, "");
 
-        if(reinsureList.size()<=0){
+        if (reinsureList.size() <= 0) {
             return getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
-        }else{
+        } else {
             BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto3 = reinsureList.get(0);
             breTreatyReinsurerInfoDto3.setBreSlipNumber(breSlipNumberNew);
             breTreatyReinsurerInfoDto3.setWrittenLine("");
@@ -204,30 +201,30 @@ public class TreatyService {
             //通过新的BreSlipNumber重新获取返回
             map = (HashMap) getBreTreatyBasisPropAllList(breTreatAllInfoDtoNew1);
         }
-        return  map;
+        return map;
     }
 
 //====================================================================================================================
+
     /**
-     *
      * @param breTreatAllInfoDto
      * @return
      */
-    public  Map getBreTreatyBasisPropAllList(BreTreatAllInfoDto breTreatAllInfoDto){
-        Map map=new HashMap();
-        String  breSlipNumber =breTreatAllInfoDto.getBreSlipNumber();
+    public Map getBreTreatyBasisPropAllList(BreTreatAllInfoDto breTreatAllInfoDto) {
+        Map map = new HashMap();
+        String breSlipNumber = breTreatAllInfoDto.getBreSlipNumber();
         //合约基本信息
-        List<BreTreatAllInfoDto> list= getBreTreatyBasisInfoList(breTreatAllInfoDto);
-        map.put("basisList",list);
+        List<BreTreatAllInfoDto> list = getBreTreatyBasisInfoList(breTreatAllInfoDto);
+        map.put("basisList", list);
         //合约信息
-        List<BreTreatAllInfoDto> propList=selectBreTreatyPropInfo(breTreatAllInfoDto);
-        map.put("propList",propList);
+        List<BreTreatAllInfoDto> propList = selectBreTreatyPropInfo(breTreatAllInfoDto);
+        map.put("propList", propList);
         //再保人信息
-        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto=new BreTreatyReinsurerInfoDto();
+        BreTreatyReinsurerInfoDto breTreatyReinsurerInfoDto = new BreTreatyReinsurerInfoDto();
         breTreatyReinsurerInfoDto.setBreSlipNumber(breSlipNumber);
-        List<BreTreatyReinsurerInfoDto> reinsureList= breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto,"");
-        map.put("reinsureList",reinsureList);
-        return  map;
+        List<BreTreatyReinsurerInfoDto> reinsureList = breTreatyReinsurerInfoService.getBreTreatyReinsurerAndArrangeList(breTreatyReinsurerInfoDto, "");
+        map.put("reinsureList", reinsureList);
+        return map;
     }
 
 
@@ -258,6 +255,12 @@ public class TreatyService {
 
 
     public int addBreTreatyBasisInfo(BreTreatAllInfoDto breTreatAllInfoDto) {
+        BreLogInfoDto breLogInfoDto = new BreLogInfoDto();
+        breLogInfoDto.setCreatedBy(breTreatAllInfoDto.getUsername());
+        breLogInfoDto.setFlagType("1");
+        breLogInfoDto.setRemarks("创建数据");
+        breLogInfoDto.setKeyValue(breTreatAllInfoDto.getBreSlipNumber());
+        addBreLogInfoInfo(breLogInfoDto);
         return basisMapper.addBreTreatyBasisInfo(breTreatAllInfoDto);
     }
 
@@ -270,11 +273,11 @@ public class TreatyService {
     }
 
     public int addBreTreatNonPropAndArrange(BreTreatAllInfoDto breTreatAllInfoDto) throws Exception {
-        String nonPropId=basisMapper.getTreatyNonPropInfoId();
+        String nonPropId = basisMapper.getTreatyNonPropInfoId();
         breTreatAllInfoDto.setPropId(nonPropId);
-        String nonPropLimit="("+breTreatAllInfoDto.getNonPropLimitNumber()+" xs "+breTreatAllInfoDto.getNonPropLimitPercentage()+"）";
+        String nonPropLimit = "(" + breTreatAllInfoDto.getNonPropLimitNumber() + " xs " + breTreatAllInfoDto.getNonPropLimitPercentage() + "）";
         breTreatAllInfoDto.setNonPropLimit(nonPropLimit);
-        int size=basisMapper.addBreTreatyNonPropInfo(breTreatAllInfoDto);
+        int size = basisMapper.addBreTreatyNonPropInfo(breTreatAllInfoDto);
         BreTreatyReinsurerInfoDto dto = new BreTreatyReinsurerInfoDto();
         dto.setBreSlipNumber(breTreatAllInfoDto.getBreSlipNumber());
         List<BreTreatyReinsurerInfoDto> list = breTreatyReinsurerInfoMapper.getBreTreatyReinsurerInfoList(dto);
@@ -297,6 +300,12 @@ public class TreatyService {
     }
 
     public int updateBreTreatyBasisInfo(BreTreatAllInfoDto breTreatAllInfoDto) {
+        BreLogInfoDto breLogInfoDto = new BreLogInfoDto();
+        breLogInfoDto.setCreatedBy(breTreatAllInfoDto.getUsername());
+        breLogInfoDto.setFlagType("2");
+        breLogInfoDto.setRemarks("修改数据");
+        breLogInfoDto.setKeyValue(breTreatAllInfoDto.getBreSlipNumber());
+        addBreLogInfoInfo(breLogInfoDto);
         return basisMapper.updateBreTreatyBasisInfo(breTreatAllInfoDto);
     }
 
@@ -322,7 +331,7 @@ public class TreatyService {
         return basisMapper.selectBreTreatyArrangeAllList(breTreatAllInfoDto);
     }
 
-    public List<BreTreatAllInfoDto> getBreTreatyNonPropInfoList(BreTreatAllInfoDto breTreatAllInfoDto){
+    public List<BreTreatAllInfoDto> getBreTreatyNonPropInfoList(BreTreatAllInfoDto breTreatAllInfoDto) {
         return basisMapper.getBreTreatyNonPropInfoList(breTreatAllInfoDto);
     }
 

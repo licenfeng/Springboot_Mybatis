@@ -182,15 +182,6 @@ public class BreTreatAllInfoDto extends pageInfoDto {
     private String breApproval;
     private String breQuoSum;
     private String breSplSum;
-    private String valueType;
-
-    public String getValueType() {
-        return valueType;
-    }
-
-    public void setValueType(String valueType) {
-        this.valueType = valueType;
-    }
 
     public String getBreCreate() {
         return breCreate;

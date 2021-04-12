@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import com.example.entity.BreTreatyArrangeInfoDto;
 import com.example.entity.BreTreatyReinsurerInfoDto;
 import com.example.entity.ResultInfoDto;
 import com.example.entity.BreTreatAllInfoDto;
@@ -16,13 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.*;
 
 @RestController
 @ResponseBody
 @RequestMapping("/breTreatyBasisInfo")
-public class BreTreatyBasisInfoController {
+public class BreTreatyBasisInfoController{
 
     @Autowired
     private TreatyCommonService treatyCommonService;

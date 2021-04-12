@@ -1,6 +1,6 @@
 package com.example.entity;
 
-public class pageInfoDto {
+public class pageInfoDto extends UserInfoDto {
 
     //Y 表示分页，N表示不分页
     private String isPaging;

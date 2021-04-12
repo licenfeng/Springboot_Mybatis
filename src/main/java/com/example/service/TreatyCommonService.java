@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class TreatyCommonService {
+public class TreatyCommonService extends BreLogInfoService{
 
     @Autowired
     BreFieIdExportInfoMapper  breFieIdExportInfoMapper;
