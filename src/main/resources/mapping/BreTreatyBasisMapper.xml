@@ -223,7 +223,8 @@
         prop.line_surplus as "lineSurplus",
         prop.commission_for_quota_share as "commissionForQuotaShare",
         prop.commission_for_surplus as "commissionForSurplus",
-        prop.fixed_or_provisional_commission as "fixedOrProvisionalCommission",
+        prop.fixed_or_provisional_commission_quo as "fixedOrProvisionalCommissionQuo",
+        prop.fixed_or_provisional_commission_spl as "fixedOrProvisionalCommissionSpl",
         prop.epi_for_quota_share as "epiForQuotaShare",
         prop.epi_for_surplus as "epiForSurplus",
         prop.event_limit as "eventLimit",
@@ -777,14 +778,14 @@
     <insert id="addBreTreatyPropInfo" parameterType="com.example.entity.BreTreatAllInfoDto">
 
         insert into bre_treaty_prop_info(
-        <if test="lineOfBusiness != null and lineOfBusiness !=''">
+        <if test="lineOfBusiness != null ">
             line_of_business ,
         </if>
 
-        <if test="breSlipNumber != null and breSlipNumber != '' ">
+        <if test="breSlipNumber != null ">
             bre_slip_number ,
         </if>
-        <if test="sectionName !=null  and sectionName ">
+        <if test="sectionName !=null ">
             section_name,
         </if>
         <if test="grossRetention!=null">
@@ -793,7 +794,7 @@
         <if test="cessionForQuotaShare!=null">
             cession_for_quota_share,
         </if>
-        <if test="lineSurplus!=null">
+        <if test="lineSurplus!=null and lineSurplus!=''">
             line_surplus,
         </if>
         <if test="commissionForQuotaShare!=null">
@@ -802,8 +803,11 @@
         <if test="commissionForSurplus!=null">
             commission_for_surplus,
         </if>
-        <if test="fixedOrProvisionalCommission!=null">
-            fixed_or_provisional_commission,
+        <if test="fixedOrProvisionalCommissionQuo!=null">
+            fixed_or_provisional_commission_quo,
+        </if>
+        <if test="fixedOrProvisionalCommissionSpl!=null">
+            fixed_or_provisional_commission_spl,
         </if>
         <if test="epiForQuotaShare!=null">
             epi_for_quota_share,
@@ -823,10 +827,10 @@
         id
         )values(
 
-        <if test="lineOfBusiness != null and lineOfBusiness !=''">
-        #{lineOfBusiness} ,
-    </if>
-        <if test="breSlipNumber!=null and lineOfBusiness !=''">
+        <if test="lineOfBusiness != null ">
+            #{lineOfBusiness} ,
+        </if>
+        <if test="breSlipNumber!=null ">
             #{breSlipNumber},
         </if>
         <if test="sectionName!=null">
@@ -838,7 +842,7 @@
         <if test="cessionForQuotaShare!=null">
             #{cessionForQuotaShare},
         </if>
-        <if test="lineSurplus!=null">
+        <if test="lineSurplus!=null and lineSurplus!=''">
             #{lineSurplus},
         </if>
         <if test="commissionForQuotaShare!=null">
@@ -847,8 +851,11 @@
         <if test="commissionForSurplus!=null">
             #{commissionForSurplus},
         </if>
-        <if test="fixedOrProvisionalCommission!=null">
-            #{fixedOrProvisionalCommission},
+        <if test="fixedOrProvisionalCommissionQuo!=null">
+            #{fixedOrProvisionalCommissionQuo},
+        </if>
+        <if test="fixedOrProvisionalCommissionSpl!=null">
+            #{fixedOrProvisionalCommissionSpl},
         </if>
         <if test="epiForQuotaShare!=null">
             #{epiForQuotaShare},
@@ -865,7 +872,7 @@
         <if test="underwritingPeriod!=null">
             #{underwritingPeriod},
         </if>
-        <if test="propId !=null or propId !=''">
+        <if test="propId !=null ">
             currval('bre_treaty_prop_info')
         </if>
         )
@@ -1160,7 +1167,8 @@
         line_surplus as "lineSurplus",
         commission_for_quota_share as "commissionForQuotaShare",
         commission_for_surplus as "commissionForSurplus",
-        fixed_or_provisional_commission as "fixedOrProvisionalCommission",
+        fixed_or_provisional_commission_quo as "fixedOrProvisionalCommissionQuo",
+        fixed_or_provisional_commission_spl as "fixedOrProvisionalCommissionSpl",
         epi_for_quota_share as "epiForQuotaShare",
         epi_for_surplus as "epiForSurplus",
         line_of_business as lineOfBusiness,
@@ -1201,10 +1209,13 @@
             and i.commission_for_surplus=#{commissionForSurplus}
         </if>
 
-        <if test="fixedOrProvisionalCommission != '' and fixedOrProvisionalCommission!= null">
-            and i.fixed_or_provisional_commission=#{fixedOrProvisionalCommission}
+        <if test="fixedOrProvisionalCommissionQuo != '' and fixedOrProvisionalCommissionQuo!= null">
+            and i.fixed_or_provisional_commission_quo=#{fixedOrProvisionalCommissionQuo}
         </if>
 
+        <if test="fixedOrProvisionalCommissionSpl != '' and fixedOrProvisionalCommissionSpl!= null">
+            and i.fixed_or_provisional_commission_spl=#{fixedOrProvisionalCommissionSpl}
+        </if>
         <if test="epiForQuotaShare != '' and epiForQuotaShare!= null">
             and i.epi_for_quota_share=#{epiForQuotaShare}
         </if>
@@ -1246,8 +1257,11 @@
         <if test="commissionForSurplus!=null">
             , commission_for_surplus=#{commissionForSurplus}
         </if>
-        <if test="fixedOrProvisionalCommission!=null">
-            ,fixed_or_provisional_commission=#{fixedOrProvisionalCommission}
+        <if test="fixedOrProvisionalCommissionQuo!=null">
+            ,fixed_or_provisional_commission_quo=#{fixedOrProvisionalCommissionQuo}
+        </if>
+        <if test="fixedOrProvisionalCommissionSpl!=null">
+            ,fixed_or_provisional_commission_spl=#{fixedOrProvisionalCommissionSpl}
         </if>
         <if test="epiForQuotaShare!=null">
             , epi_for_quota_share=#{epiForQuotaShare}
@@ -1449,9 +1463,9 @@
         non_Prop_Limit as "nonPropLimit"
         from bre_treaty_non_prop_info
         where 1=1
-     <if test="nonPropId!=null and nonPropId !=''">
-        and  id=#{nonPropId}
-    </if>
+        <if test="nonPropId!=null and nonPropId !=''">
+            and  id=#{nonPropId}
+        </if>
         <if test="breSlipNumber!=null and breSlipNumber !=''">
             and  bre_slip_number=#{breSlipNumber}
         </if>

@@ -123,7 +123,8 @@ public class BreTreatAllInfoDto extends pageInfoDto {
     private Integer lineSurplus;
     private String commissionForQuotaShare;
     private String commissionForSurplus;
-    private String fixedOrProvisionalCommission;
+    private String fixedOrProvisionalCommissionQuo;
+    private String fixedOrProvisionalCommissionSpl;
     private String epiForQuotaShare;
     private String epiForSurplus;
     private String eventLimit;
@@ -574,12 +575,20 @@ public class BreTreatAllInfoDto extends pageInfoDto {
         this.commissionForSurplus = commissionForSurplus;
     }
 
-    public String getFixedOrProvisionalCommission() {
-        return fixedOrProvisionalCommission;
+    public String getFixedOrProvisionalCommissionQuo() {
+        return fixedOrProvisionalCommissionQuo;
     }
 
-    public void setFixedOrProvisionalCommission(String fixedOrProvisionalCommission) {
-        this.fixedOrProvisionalCommission = fixedOrProvisionalCommission;
+    public void setFixedOrProvisionalCommissionQuo(String fixedOrProvisionalCommissionQuo) {
+        this.fixedOrProvisionalCommissionQuo = fixedOrProvisionalCommissionQuo;
+    }
+
+    public String getFixedOrProvisionalCommissionSpl() {
+        return fixedOrProvisionalCommissionSpl;
+    }
+
+    public void setFixedOrProvisionalCommissionSpl(String fixedOrProvisionalCommissionSpl) {
+        this.fixedOrProvisionalCommissionSpl = fixedOrProvisionalCommissionSpl;
     }
 
     public String getEpiForQuotaShare() {
