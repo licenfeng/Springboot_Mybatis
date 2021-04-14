@@ -148,4 +148,9 @@ public class TreatyCommonService extends BreLogInfoService{
         }
         return workbook;
     }
+
+    public String treatyTypekeyGetvalueType(Integer treatyTypekey){
+        return breWordbookInfoMapper.treatyTypekeyGetvalueType(treatyTypekey);
+
+    }
 }

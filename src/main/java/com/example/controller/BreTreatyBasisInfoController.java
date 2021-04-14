@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import sun.plugin2.main.server.ResultID;
+
 import java.util.*;
 
 @RestController
@@ -327,6 +329,22 @@ public class BreTreatyBasisInfoController{
             return ResultUtils.success(state);
         } catch (Exception e) {
             log.error("updateBreTreatyArrangePropInfo 接口异常：" + e.toString(), e);
+            return ResultUtils.error("数据修改异常");
+        }
+    }
+
+    @RequestMapping("/updateAndReturnBreBoundNo")
+    public ResultInfoDto updateAndReturnBreBoundNo(BreTreatAllInfoDto breTreatAllInfoDto){
+        try {
+            Integer treatyTypekey = treatyService.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
+            //根据treatyTypekey查 valueType
+            String valueType = treatyCommonService.treatyTypekeyGetvalueType(treatyTypekey);
+            //1 Quota Share  2  Surplus  3 Quota Share and Surplus  4 Excess of Loss
+
+
+            return ResultUtils.success(state);
+        } catch (Exception e) {
+            log.error("updateAndReturnBreBoundNo 接口异常：" + e.toString(), e);
             return ResultUtils.error("数据修改异常");
         }
     }

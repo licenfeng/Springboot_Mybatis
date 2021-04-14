@@ -27,4 +27,6 @@ public interface BreWordbookInfoMapper {
 
    String getReinsurerId();
 
+   String treatyTypekeyGetvalueType(Integer treatyTypeKey);
+
 }

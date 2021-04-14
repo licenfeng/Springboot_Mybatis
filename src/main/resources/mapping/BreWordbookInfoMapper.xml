@@ -169,4 +169,8 @@
         select  currval('bre_treaty_reinsurer_info')
     </select>
 
+    <select id="treatyTypekeyGetvalueType" parameterType="Integer" resultType="String">
+        select value_type as valueType from bre_wordbook_info where key_type ='#{treatyTypeKey}'
+    </select>
+
 </mapper>

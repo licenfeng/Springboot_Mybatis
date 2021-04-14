@@ -36,6 +36,35 @@ public class BreTreatyReinsurerInfoDto  {
 
     private String propId;
 
+    private String reinsurerRemarks;
+
+    private String arrangeCommissionForSurplus;
+    private String arrangeCommissionForQuotaShare;
+
+    public String getArrangeCommissionForSurplus() {
+        return arrangeCommissionForSurplus;
+    }
+
+    public void setArrangeCommissionForSurplus(String arrangeCommissionForSurplus) {
+        this.arrangeCommissionForSurplus = arrangeCommissionForSurplus;
+    }
+
+    public String getArrangeCommissionForQuotaShare() {
+        return arrangeCommissionForQuotaShare;
+    }
+
+    public void setArrangeCommissionForQuotaShare(String arrangeCommissionForQuotaShare) {
+        this.arrangeCommissionForQuotaShare = arrangeCommissionForQuotaShare;
+    }
+
+    public String getReinsurerRemarks() {
+        return reinsurerRemarks;
+    }
+
+    public void setReinsurerRemarks(String reinsurerRemarks) {
+        this.reinsurerRemarks = reinsurerRemarks;
+    }
+
     public String getPropId() {
         return this.propId;
     }

@@ -347,4 +347,8 @@ public class TreatyService extends BreLogInfoService {
     public String getTreatyNonPropInfoId() {
         return basisMapper.getTreatyNonPropInfoId();
     }
+
+    public Integer selectTreatyTypeBySlipNumber(BreTreatAllInfoDto breTreatAllInfoDto){
+        return basisMapper.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
+    }
 }

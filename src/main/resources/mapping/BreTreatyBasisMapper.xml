@@ -32,7 +32,7 @@
     </resultMap>
 
     <select id="selectBreTreatyBasisAllName" resultType="com.example.entity.BreTreatAllInfoDto">
-        select treaty_name as treatyName from bre_treaty_basis_info
+        select treaty_name as treatyName,currency_key as currencyKey,currency as currency  from bre_treaty_basis_info
     </select>
 
     <select id="getBreTreatyBasisInfoList" parameterType="com.example.entity.BreTreatAllInfoDto"
@@ -968,7 +968,7 @@
         <if test="conditionReinsurer!=null and conditionReinsurer!=''">
             condition_reinsurer,
         </if>
-        <if test="remarks!=null and remarks!=''">
+        <if test="reinsurerRemarks!=null and reinsurerRemarks!=''">
             remarks,
         </if>
         id
@@ -1022,8 +1022,8 @@
         <if test="conditionReinsurer!=null and conditionReinsurer!=''">
             #{conditionReinsurer},
         </if>
-        <if test="remarks!=null and remarks!=''">
-            #{remarks},
+        <if test="reinsurerRemarks!=null and reinsurerRemarks!=''">
+            #{reinsurerRemarks},
         </if>
         #{reinsurerId}
         )
@@ -1471,4 +1471,7 @@
         </if>
     </select>
 
+    <select id="selectTreatyTypeBySlipNumber" parameterType="com.example.entity.BreTreatAllInfoDto" resultType="Integer">
+        select treaty_type_key as treatyTypeKey from bre_treaty_basis_info where bre_slip_number=#{breSlipNumber}
+    </select>
 </mapper>

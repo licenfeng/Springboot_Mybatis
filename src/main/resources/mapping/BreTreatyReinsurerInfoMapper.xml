@@ -46,9 +46,16 @@
         <if test="conditionReinsurer!=null and conditionReinsurer !=''">
             , condition_reinsurer=#{conditionReinsurer}
         </if>
-        <if test="remarks!=null and remarks !=''">
-            , remarks=#{remarks}
+        <if test="reinsurerRemarks!=null and reinsurerRemarks !=''">
+            , remarks=#{reinsurerRemarks}
         </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            , arrange_commission_for_surplus=#{arrangeCommissionForSurplus}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            , arrange_commission_for_quota_share=#{arrangeCommissionForQuotaShare}
+        </if>
+
         where 1=1
         <if test="id!=null and id !=''">
             and id=#{id}
@@ -80,7 +87,9 @@
         status_reinsurer as "statusReinsurer",
         DATE_FORMAT(signing_date,'%Y-%m-%d %H:%i:%s') as "signingDate",
         condition_reinsurer as "conditionReinsurer",
-        remarks as "remarks"
+        remarks as "reinsurerRemarks",
+        arrange_commission_for_surplus as "arrangeCommissionForSurplus",
+        arrange_commission_for_quota_share as "arrangeCommissionForQuotaShare"
         from bre_treaty_reinsurer_info
         where 1=1
         <if test="id!=null and id !=''">
@@ -136,6 +145,12 @@
         </if>
         <if test="remarks!=null and remarks !=''">
             and remarks=#{remarks}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            and arrange_commission_for_surplus=#{arrangeCommissionForSurplus}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            and arrange_commission_for_quota_share=#{arrangeCommissionForQuotaShare}
         </if>
 
     </select>
@@ -193,6 +208,12 @@
         <if test="remarks!=null and remarks != ''">
             , remarks
         </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus != ''">
+            , arrange_commission_for_surplus
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare != ''">
+            , arrange_commission_for_quota
+        </if>
         ) values ( currval('bre_treaty_reinsurer_info')
         <if test="breSlipNumber!=null and breSlipNumber != ''">
             , #{breSlipNumber}
@@ -244,6 +265,12 @@
         </if>
         <if test="remarks!=null and remarks != ''">
             , #{remarks}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus != ''">
+            , #{arrangeCommissionForSurplus}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare != ''">
+            , #{arrangeCommissionForQuotaShare}
         </if>
         )
     </insert>
@@ -303,6 +330,12 @@
         </if>
         <if test="remarks!=null and remarks !=''">
             and remarks=#{remarks}
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus !=''">
+            and arrange_commission_for_surplus=#{arrangeCommissionForSurplus}
+        </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare !=''">
+            and arrange_commission_for_quota_share=#{arrangeCommissionForQuotaShare}
         </if>
 
     </delete>

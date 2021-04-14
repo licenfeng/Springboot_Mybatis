@@ -44,4 +44,6 @@ public interface BreTreatyBasisMapper {
     String getTreatyPropInfoId();
 
     String getTreatyNonPropInfoId();
+    int selectTreatyTypeBySlipNumber(BreTreatAllInfoDto breTreatAllInfoDto);
+
 }
