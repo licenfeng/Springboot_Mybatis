@@ -225,7 +225,7 @@ public class BreTreatyBasisInfoController{
     }
 
     /**
-     * @param breTreatAllInfoDto
+     * @param
      * @return
      */
     @RequestMapping("/addBreTreatyArrangeAllInfo")
