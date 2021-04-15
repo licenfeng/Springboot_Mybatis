@@ -131,12 +131,12 @@ public class CommonUtils {
         return date.compareTo(date1);
     }
 
-    public String compositionBreBoundNo(String valueType){
+    public static String compositionBreBoundNo(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy");
         Date date = new Date();
         String dataString = df.format(date);
 
-        return null;
+        return dataString;
     }
 
 }

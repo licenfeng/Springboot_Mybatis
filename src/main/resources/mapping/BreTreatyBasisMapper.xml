@@ -879,6 +879,11 @@
 
     </insert>
 
+
+    <select id="getBreTreatyPropInfoBySlipNumber" parameterType="com.example.entity.BreTreatAllInfoDto">
+        select count(*) from bre_treaty_prop_info where  bre_slip_number=#{breSlipNumber};
+    </select>
+
     <select id="getTreatyPropInfoId" resultType="java.lang.String">
             select  currval('bre_treaty_prop_info')
     </select>
@@ -1493,7 +1498,7 @@
         </if>
     </select>
 
-    <select id="selectTreatyTypeBySlipNumber" parameterType="com.example.entity.BreTreatAllInfoDto" resultType="Integer">
-        select treaty_type_key as treatyTypeKey from bre_treaty_basis_info where bre_slip_number=#{breSlipNumber}
+    <select id="selectTreatyTypeBySlipNumber" parameterType="com.example.entity.BreTreatAllInfoDto" resultType="com.example.entity.BreTreatAllInfoDto" >
+        select treaty_type_key as treatyTypeKey,treaty_type as treatyType from bre_treaty_basis_info where bre_slip_number=#{breSlipNumber}
     </select>
 </mapper>

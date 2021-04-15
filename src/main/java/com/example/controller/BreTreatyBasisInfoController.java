@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.entity.BreTreatyReinsurerInfoDto;
 import com.example.entity.ResultInfoDto;
 import com.example.entity.BreTreatAllInfoDto;
+import com.example.mapper.BreWordbookInfoMapper;
 import com.example.service.BreTreatyArrangeInfoService;
 import com.example.service.BreTreatyReinsurerInfoService;
 import com.example.service.TreatyCommonService;
@@ -336,25 +337,8 @@ public class BreTreatyBasisInfoController{
     @RequestMapping("/updateAndReturnBreBoundNo")
     public ResultInfoDto updateAndReturnBreBoundNo(BreTreatAllInfoDto breTreatAllInfoDto){
         try {
-            //根据slipNUmber查出 treaty_type_key    1.2.3.4
-            Integer treatyTypekey = treatyService.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
-            //根据treatyTypekey查 valueType
-            String valueType = treatyCommonService.treatyTypekeyGetvalueType(treatyTypekey);
-            //1 Quota Share  2  Surplus  3 Quota Share and Surplus  4 Excess of Loss
-            if("Quota Share".equals(valueType)){
-
-            }
-            if("Surplus".equals(valueType)){
-
-            }
-            if("Quota Share and Surplus".equals(valueType)){
-
-            }
-            if("Excess of Loss".equals(valueType)){
-
-            }
-
-            return null;
+            String  breBoundNo= treatyService.updateAndReturnBreBoundNo(breTreatAllInfoDto);
+            return ResultUtils.success(breBoundNo);
         } catch (Exception e) {
             log.error("updateAndReturnBreBoundNo 接口异常：" + e.toString(), e);
             return ResultUtils.error("数据修改异常");

@@ -1,10 +1,8 @@
 package com.example.service;
 
 import com.example.entity.*;
-import com.example.mapper.BreTreatyArrangeInfoMapper;
-import com.example.mapper.BreTreatyBasisMapper;
-import com.example.mapper.BreTreatyNonPropArrangeInfoMapper;
-import com.example.mapper.BreTreatyReinsurerInfoMapper;
+import com.example.mapper.*;
+import com.example.utils.CommonUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,12 @@ public class TreatyService extends BreLogInfoService {
 
     @Autowired
     private BreTreatyArrangeInfoMapper breTreatyArrangeInfoMapper;
+
+    @Autowired
+    BreWordbookInfoMapper breWordbookInfoMapper;
+
+    @Autowired
+    BreTreatyBasisMapper breTreatyBasisMapper;
 
     public List<BreTreatAllInfoDto> selectBreTreatyBasisAllName() {
         return basisMapper.selectBreTreatyBasisAllName();
@@ -348,7 +352,37 @@ public class TreatyService extends BreLogInfoService {
         return basisMapper.getTreatyNonPropInfoId();
     }
 
-    public Integer selectTreatyTypeBySlipNumber(BreTreatAllInfoDto breTreatAllInfoDto){
-        return basisMapper.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
+
+
+    public String updateAndReturnBreBoundNo(BreTreatAllInfoDto breTreatAllInfoDto){
+        //根据slipNUmber查出 treaty_type_key    treatyType   1.2.3.4
+        List<BreTreatAllInfoDto> list = basisMapper.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
+        BreTreatAllInfoDto breTreatAllInfoDtoNew =null;
+        if(list!=null){
+            breTreatAllInfoDtoNew = list.get(0);
+        }
+        String  treatyType = breTreatAllInfoDtoNew.getTreatyType();
+        String number = breWordbookInfoMapper.getBreSlipNumber();
+        String date = CommonUtils.compositionBreBoundNo();
+
+        Integer layer = breTreatyBasisMapper.getBreTreatyPropInfoBySlipNumber(breTreatAllInfoDto);
+        String breBoundNo ="";
+
+        //根据treatyTypekey查 valueType
+        // String valueType = treatyCommonService.treatyTypekeyGetvalueType(treatyTypekey);
+        //1 Quota Share  2  Surplus  3 Quota Share and Surplus  4 Excess of Loss
+        if("Quota Share".equals(treatyType)){
+            breBoundNo ="B"+date+number+"QUO";
+        }
+        if("Surplus".equals(treatyType)){
+            breBoundNo ="B"+date+number+"SPL";
+        }
+        if("Quota Share and Surplus".equals(treatyType)){
+            breBoundNo ="B"+date+number+"QSS";
+        }
+        if("Excess of Loss".equals(treatyType) || "Stop Loss".equals(treatyType)){
+            breBoundNo ="B"+date+number+"L"+Integer.toString(layer);
+        }
+        return breBoundNo;
     }
 }
