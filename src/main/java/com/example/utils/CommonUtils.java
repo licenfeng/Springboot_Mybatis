@@ -8,6 +8,7 @@ import com.example.entity.BreFieldExportInfoDto;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -128,6 +129,14 @@ public class CommonUtils {
         Date date = df.parse(stringDate);
         Date date1 = new Date();
         return date.compareTo(date1);
+    }
+
+    public String compositionBreBoundNo(String valueType){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        String dataString = df.format(date);
+
+        return null;
     }
 
 }

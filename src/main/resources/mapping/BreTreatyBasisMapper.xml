@@ -971,6 +971,12 @@
         <if test="reinsurerRemarks!=null and reinsurerRemarks!=''">
             remarks,
         </if>
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare!=''">
+            arrange_commission_for_quota_share,
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus!=''">
+            arrange_commission_for_surplus,
+        </if>
         id
         )values(
 
@@ -1025,6 +1031,14 @@
         <if test="reinsurerRemarks!=null and reinsurerRemarks!=''">
             #{reinsurerRemarks},
         </if>
+
+        <if test="arrangeCommissionForQuotaShare!=null and arrangeCommissionForQuotaShare!=''">
+           #{arrangeCommissionForQuotaShare},
+        </if>
+        <if test="arrangeCommissionForSurplus!=null and arrangeCommissionForSurplus!=''">
+            #{arrangeCommissionForSurplus},
+        </if>
+
         #{reinsurerId}
         )
     </insert>
@@ -1060,6 +1074,12 @@
         </if>
         <if test="nonPropCoverage!=null and nonPropCoverage !=''">
             , coverage=#{nonPropCoverage}
+        </if>
+        <if test="nonPropLimitNumber!=null and nonPropLimitNumber!=''">
+            , non_prop_limit_number=#{nonPropLimitNumber}
+        </if>
+        <if test="nonPropLimitPercentage!=null and nonPropLimitPercentage!=''">
+            , non_prop_limit_percentage=#{nonPropLimitPercentage}
         </if>
         where 1=1
         <if test="nonPropId!=null and nonPropId !=''">
@@ -1107,8 +1127,8 @@
         </if>
         <if test="nonPropLimitNumber!=null and nonPropLimitNumber!='' and nonPropLimitPercentage!=null and  nonPropLimitPercentage!=''">
             non_prop_limit_number ,
-            non_Prop_Limit_Percentage  ,
-            non_prop_Limit,
+            non_prop_limit_percentage ,
+            non_prop_limit,
         </if>
         id
         )values(
@@ -1427,6 +1447,8 @@
             reinsurer.signing_date as "signing",
             reinsurer.condition_reinsurer as "conditionReinsurer",
             reinsurer.remarks as "reinsurerRemarks",
+            reinsurer.arrange_commission_for_quota_share as "arrangeCommissionForQuotaShare",
+            reinsurer.arrange_commission_for_surplus as "arrangeCommissionForSurplus",
             arrange.id as "arrangeId",
             arrange.bre_slip_number as "arrangeBreSlipNumber",
             arrange.prop_id as "arrangePropId",
@@ -1458,9 +1480,9 @@
         rate_on_line as "nonPropRateOnLine",
         reinstatement as "nonPropReinstatement",
         coverage as "nonPropCoverage",
-        non_Prop_Limit_Number as "nonPropLimitNumber",
-        non_Prop_Limit_Percentage as "nonPropLimitPercentage",
-        non_Prop_Limit as "nonPropLimit"
+        non_prop_limit_number as "nonPropLimitNumber",
+        non_prop_limit_percentage as "nonPropLimitPercentage",
+        non_prop_limit as "nonPropLimit"
         from bre_treaty_non_prop_info
         where 1=1
         <if test="nonPropId!=null and nonPropId !=''">

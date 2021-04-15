@@ -303,7 +303,7 @@ public class BreTreatyBasisInfoController{
     @RequestMapping("/updateBreTreatyNonPropInfo")
     public ResultInfoDto updateBreTreatyNonPropInfo(BreTreatAllInfoDto breTreatAllInfoDto) {
         try {
-            int state = treatyService.updateBreTreatyNonPropInfo(breTreatAllInfoDto);
+             int state = treatyService.updateBreTreatyNonPropInfo(breTreatAllInfoDto);
             return ResultUtils.success(state);
         } catch (Exception e) {
             log.error("updateBreTreatyNonPropInfo 接口异常：" + e.toString(), e);
@@ -336,13 +336,25 @@ public class BreTreatyBasisInfoController{
     @RequestMapping("/updateAndReturnBreBoundNo")
     public ResultInfoDto updateAndReturnBreBoundNo(BreTreatAllInfoDto breTreatAllInfoDto){
         try {
+            //根据slipNUmber查出 treaty_type_key    1.2.3.4
             Integer treatyTypekey = treatyService.selectTreatyTypeBySlipNumber(breTreatAllInfoDto);
             //根据treatyTypekey查 valueType
             String valueType = treatyCommonService.treatyTypekeyGetvalueType(treatyTypekey);
             //1 Quota Share  2  Surplus  3 Quota Share and Surplus  4 Excess of Loss
+            if("Quota Share".equals(valueType)){
 
+            }
+            if("Surplus".equals(valueType)){
 
-            return ResultUtils.success(state);
+            }
+            if("Quota Share and Surplus".equals(valueType)){
+
+            }
+            if("Excess of Loss".equals(valueType)){
+
+            }
+
+            return null;
         } catch (Exception e) {
             log.error("updateAndReturnBreBoundNo 接口异常：" + e.toString(), e);
             return ResultUtils.error("数据修改异常");
