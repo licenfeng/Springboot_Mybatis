@@ -339,7 +339,7 @@ public class BreTreatyBasisInfoController{
         try {
             String  breBoundNo= treatyService.updateAndReturnBreBoundNo(breTreatAllInfoDto);
             return ResultUtils.success(breBoundNo);
-        } catch (Exception e) {
+        } catch (Exception e){
             log.error("updateAndReturnBreBoundNo 接口异常：" + e.toString(), e);
             return ResultUtils.error("数据修改异常");
         }
