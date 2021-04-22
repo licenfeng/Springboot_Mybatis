@@ -30,8 +30,6 @@ public class BreCountryRegionInfoController {
 
     @RequestMapping("/getBreCountryRegionInfoList")
     public ResultInfoDto getBreCountryRegionInfoList(BreCountryRegionInfoDto breCountryRegionInfoDto) {
-        //edit by licenfeng
-        //edit by  dev
         try {
             List<BreCountryRegionInfoDto> list = breCountryRegionInfoService.getBreCountryRegionInfoList(breCountryRegionInfoDto);
             return ResultUtils.success(list);
@@ -39,7 +37,6 @@ public class BreCountryRegionInfoController {
             return ResultUtils.error(-1, "数据查询异常");
         }
     }
-
     @RequestMapping("/updateBreCountryRegionInfo")
     public ResultInfoDto updateBreCountryRegionInfo(BreCountryRegionInfoDto breCountryRegionInfoDto) {
         try {
